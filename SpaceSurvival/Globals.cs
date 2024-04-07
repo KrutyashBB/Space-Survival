@@ -10,8 +10,9 @@ public static class Globals
     public static Point WindowSize { get; set; }
 
 
-    public static void Update(GameTime gameTime)
+    public static void Update(GameTime gameTime, GraphicsDevice graphicsDevice)
     {
+        WindowSize = graphicsDevice.Viewport.Bounds.Size;
         TotalSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 }

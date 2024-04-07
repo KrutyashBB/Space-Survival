@@ -38,3 +38,7 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\obj\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\tiny_ship8.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\obj\Debug\net6.0-windows\SpaceSurvival.sourcelink.json
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\bg-space.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\planet1.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\planet2.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\planet3.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\planet4.xnb

@@ -18,6 +18,7 @@ public class Game1 : Game
         Globals.WindowSize = new Point(1024, 768);
         _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
         _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+        Window.AllowUserResizing = true;
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
@@ -39,7 +40,7 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        Globals.Update(gameTime);
+        Globals.Update(gameTime, GraphicsDevice);
         _gameManager.Update();
 
         base.Update(gameTime);
