@@ -15,8 +15,9 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        _graphics.PreferredBackBufferWidth = 1024;
-        _graphics.PreferredBackBufferHeight = 768;
+        Globals.WindowSize = new Point(1024, 768);
+        _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
+        _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
@@ -48,9 +49,7 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
         _gameManager.Draw();
-        _spriteBatch.End();
 
         base.Draw(gameTime);
     }

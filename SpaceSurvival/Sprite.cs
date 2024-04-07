@@ -4,7 +4,7 @@ public class Sprite
 {
     protected readonly Texture2D Texture;
     protected readonly Vector2 Origin;
-    protected Vector2 Position;
+    public Vector2 Position;
     protected readonly int Speed = 300;
 
     public Sprite(Texture2D tex, Vector2 pos)
