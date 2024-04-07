@@ -11,6 +11,6 @@ public static class Globals
 
     public static void Update(GameTime gameTime)
     {
-        TotalSeconds = (float)gameTime.TotalGameTime.TotalSeconds;
+        TotalSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 }

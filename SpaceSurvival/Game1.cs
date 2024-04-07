@@ -4,6 +4,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private GameManager _gameManager;
 
     public Game1()
     {
@@ -19,6 +20,9 @@ public class Game1 : Game
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
+
+        _gameManager = new GameManager();
+
         base.Initialize();
     }
 
@@ -35,7 +39,7 @@ public class Game1 : Game
             Exit();
 
         Globals.Update(gameTime);
-
+        _gameManager.Update();
 
         base.Update(gameTime);
     }
@@ -43,11 +47,11 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        
-        _spriteBatch.Begin();
-        
+
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        _gameManager.Draw();
         _spriteBatch.End();
-        
+
         base.Draw(gameTime);
     }
 }
