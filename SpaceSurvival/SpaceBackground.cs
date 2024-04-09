@@ -2,12 +2,8 @@
 
 public class SpaceBackground : Sprite
 {
-    private const float Scale = 3f;
-    public Point MapSize { get; private set; }
-
-    public SpaceBackground(Texture2D tex, Vector2 pos) : base(tex, pos)
+    public SpaceBackground(Texture2D tex, Vector2 pos, float scale = 1f) : base(tex, pos, scale)
     {
-        MapSize = new Point((int)(tex.Width * Scale), (int)(tex.Height * Scale));
     }
 
     public override void Draw()

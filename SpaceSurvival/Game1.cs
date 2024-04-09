@@ -20,7 +20,8 @@ public class Game1 : Game
         _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
         Window.AllowUserResizing = true;
         _graphics.ApplyChanges();
-
+        
+        Globals.GraphicsDevice = GraphicsDevice;
         Globals.Content = Content;
 
         _gameManager = new GameManager();
@@ -40,7 +41,7 @@ public class Game1 : Game
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        Globals.Update(gameTime, GraphicsDevice);
+        Globals.Update(gameTime);
         _gameManager.Update();
 
         base.Update(gameTime);

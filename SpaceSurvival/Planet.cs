@@ -8,8 +8,9 @@ public class Planet : Sprite
     private readonly float _rotationSpeed = 0.3f;
     private readonly float _randomSpeed;
 
-    public Planet(Texture2D tex, Vector2 pos) : base(tex, pos)
+    public Planet(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
+        Scale = scale;
         var random = new Random();
         _randomSpeed = (float)random.NextDouble();
     }
@@ -21,6 +22,6 @@ public class Planet : Sprite
 
     public override void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, Origin, 1f, SpriteEffects.None, 1f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None, 1f);
     }
 }

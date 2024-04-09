@@ -39,9 +39,9 @@ namespace SpaceSurvival
 
         public static void CreatePlanets()
         {
-            for (int row = 1; row < _rows; row++)
+            for (var row = 1; row < _rows; row++)
             {
-                for (int column = 1; column < _columns; column++)
+                for (var column = 1; column < _columns; column++)
                 {
                     var posX = column * (_textures[0].Width + _padding);
                     var posY = row * (_textures[0].Height + _padding);
@@ -52,7 +52,7 @@ namespace SpaceSurvival
                     var textureIndex = _random.Next(0, _textures.Length);
                     var position = new Vector2(posX, posY);
 
-                    Planets.Add(new Planet(_textures[textureIndex], position));
+                    Planets.Add(new Planet(_textures[textureIndex], position, 1f));
                 }
             }
 

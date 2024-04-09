@@ -8,8 +8,9 @@ public class Ship : Sprite
     private readonly float _rotationSpeed = 3f;
     private Vector2 _minPos, _maxPos;
 
-    public Ship(Texture2D tex, Vector2 pos) : base(tex, pos)
+    public Ship(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
+        Scale = scale;
     }
 
     public void SetBounds(Point mapSize)
@@ -28,6 +29,6 @@ public class Ship : Sprite
 
     public override void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, Origin, 1f, SpriteEffects.None, 1f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None, 1f);
     }
 }
