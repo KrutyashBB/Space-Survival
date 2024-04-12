@@ -15,11 +15,11 @@ public class Sprite
         Position = pos;
         Scale = scale;
         Origin = new Vector2(Texture.Width / 2f, Texture.Height / 2f);
-        Size = new Point((int)(tex.Width * Scale), (int)(tex.Height * Scale));
+        Size = new Point((int)(Texture.Width * Scale), (int)(Texture.Height * Scale));
     }
 
     public virtual void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, 0f, Origin, 1f, SpriteEffects.None, 1f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 1f);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SpaceSurvival;
+﻿using System;
+
+namespace SpaceSurvival;
 
 public class Game1 : Game
 {
@@ -15,12 +17,13 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        Globals.WindowSize = new Point(1024, 768);
-        _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
-        _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+        Globals.WindowSize = new Point(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+            GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+        _graphics.PreferredBackBufferWidth = 1024;
+        _graphics.PreferredBackBufferHeight = 768;
         Window.AllowUserResizing = true;
         _graphics.ApplyChanges();
-        
+
         Globals.GraphicsDevice = GraphicsDevice;
         Globals.Content = Content;
 

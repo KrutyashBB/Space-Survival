@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pKDykgf3G1JUve9x+LKsRPE2rFoLqB12E0KKGkzUi96kVegpHGo7S4oFBkNCyFo89YEu/CcuX8fIMToYaGqFAQ==",
+  "dgSpecHash": "PYJFW1DLCRsw9ciZF6ZTtPZfVxcx6VNpFno5Hn4MnC4Hyh9N0nbQRPJ10xir7tVOxf4berCxXgA6JiyJkA+jeA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Krutyash\\RiderProjects\\SpaceSurvival\\SpaceSurvival\\SpaceSurvival.csproj",
   "expectedPackageFiles": [
@@ -125,10 +125,10 @@
     "C:\\Users\\Krutyash\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512",
-    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.28\\microsoft.netcore.app.host.win-x64.6.0.28.nupkg.sha512"
+    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.29\\microsoft.netcore.app.host.win-x64.6.0.29.nupkg.sha512"
   ],
   "logs": []
 }
