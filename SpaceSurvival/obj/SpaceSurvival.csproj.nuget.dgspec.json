@@ -50,6 +50,14 @@
             "MonoGame.Framework.WindowsDX": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "TiledCS": {
+              "target": "Package",
+              "version": "[3.3.3, )"
             }
           },
           "imports": [

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PYJFW1DLCRsw9ciZF6ZTtPZfVxcx6VNpFno5Hn4MnC4Hyh9N0nbQRPJ10xir7tVOxf4berCxXgA6JiyJkA+jeA==",
+  "dgSpecHash": "SAnzXgZ5RmYn9QNFv7ySODraxboyJ+nwcACFxWl/yebrZ3dmlhnmiuWK+fVyVTAbK2ELw0vlgtrzDXbx/iGYHA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Krutyash\\RiderProjects\\SpaceSurvival\\SpaceSurvival\\SpaceSurvival.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\Krutyash\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\monogame.framework.windowsdx\\3.8.1.303\\monogame.framework.windowsdx.3.8.1.303.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\netstandard.library\\1.6.0\\netstandard.library.1.6.0.nupkg.sha512",
+    "C:\\Users\\Krutyash\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\runtime.native.system\\4.0.0\\runtime.native.system.4.0.0.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\runtime.native.system.io.compression\\4.1.0\\runtime.native.system.io.compression.4.1.0.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\runtime.native.system.net.http\\4.0.1\\runtime.native.system.net.http.4.0.1.nupkg.sha512",
@@ -125,6 +126,7 @@
     "C:\\Users\\Krutyash\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
+    "C:\\Users\\Krutyash\\.nuget\\packages\\tiledcs\\3.3.3\\tiledcs.3.3.3.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
     "C:\\Users\\Krutyash\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512",

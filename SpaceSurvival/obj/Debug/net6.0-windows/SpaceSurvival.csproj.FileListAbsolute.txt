@@ -45,3 +45,6 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\hero.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Tile1.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Tile2.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\TiledCS.dll
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\MasterSimple.xnb

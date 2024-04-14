@@ -1,0 +1,7 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bg-space.png","C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/bg-space.xnb","TextureProcessor","Texture2DContent",21446,4000085,0,3623569
+"C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/planet1.png","C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/planet1.xnb","TextureProcessor","Texture2DContent",8929,160085,0,0156782
+"C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/planet2.png","C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/planet2.xnb","TextureProcessor","Texture2DContent",3616,160085,0,0094232
+"C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/planet3.png","C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/planet3.xnb","TextureProcessor","Texture2DContent",5917,160085,0,0129322
+"C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/planet4.png","C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/planet4.xnb","TextureProcessor","Texture2DContent",3510,160085,0,0109027
+"C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/tiny_ship8.png","C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/tiny_ship8.xnb","TextureProcessor","Texture2DContent",19349,45141,0,0088972

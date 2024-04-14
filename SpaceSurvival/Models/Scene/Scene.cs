@@ -22,7 +22,7 @@ public abstract class Scene
         Globals.GraphicsDevice.SetRenderTarget(Target);
         Globals.GraphicsDevice.Clear(Color.Black);
 
-        Globals.SpriteBatch.Begin();
+        Globals.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         Draw();
         Globals.SpriteBatch.End();
 
