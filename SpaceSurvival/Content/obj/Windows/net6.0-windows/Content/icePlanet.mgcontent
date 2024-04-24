@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/planet3.png</SourceFile>
+  <SourceFile>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/icePlanet.png</SourceFile>
   <SourceTime>2024-04-07T21:50:31.321672+05:00</SourceTime>
-  <DestFile>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/Content/planet3.xnb</DestFile>
-  <DestTime>2024-04-07T22:08:01.158702+05:00</DestTime>
+  <DestFile>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bin/Windows/Content/icePlanet.xnb</DestFile>
+  <DestTime>2024-04-23T19:04:13.3724803+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

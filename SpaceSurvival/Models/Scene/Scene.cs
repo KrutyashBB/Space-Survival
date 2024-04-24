@@ -13,9 +13,9 @@ public abstract class Scene
     }
 
     protected abstract void Load();
-    protected abstract void Draw();
-    public abstract void Update();
     public abstract void Activate();
+    public abstract void Update();
+    protected abstract void Draw();
 
     public virtual RenderTarget2D GetFrame()
     {

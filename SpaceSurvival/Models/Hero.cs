@@ -50,11 +50,12 @@ public class Hero
             if (obj.Intersects(CalculateBounds(Position)))
                 Console.WriteLine(555555);
         }
+        
 
         var directionHero = new Vector2(InputManager.Direction.X, -InputManager.Direction.Y);
         if (InputManager.Moving)
             Position += Vector2.Normalize(directionHero) * Speed * Globals.TotalSeconds;
-
+        
         _anims.Update(InputManager.Direction);
     }
 

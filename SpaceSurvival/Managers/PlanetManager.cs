@@ -1,37 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SpaceSurvival
 {
     public static class PlanetManager
     {
-        public static List<Planet> Planets { get; } = new();
-        private static Texture2D[] _textures;
+        public static List<PlanetSprite> Planets { get; } = new();
+
+        private static List<(TypePlanet, Texture2D)> _textures;
         private static Random _random;
         private static int _columns;
         private static int _rows;
         private static int _padding;
         private static int _maxOffset;
 
+        private static int planetScale = 1;
+
         public static void Init(int mapWidth, int mapHeight)
         {
             _random = new Random();
-            _textures = new[]
+            _textures = new List<(TypePlanet, Texture2D)>
             {
-                Globals.Content.Load<Texture2D>("Planet1"),
-                Globals.Content.Load<Texture2D>("Planet2"),
-                Globals.Content.Load<Texture2D>("Planet3"),
-                Globals.Content.Load<Texture2D>("Planet4")
+                (TypePlanet.Green, Globals.Content.Load<Texture2D>("greenPlanet")),
+                (TypePlanet.Ice, Globals.Content.Load<Texture2D>("icePlanet")),
+                (TypePlanet.Violet, Globals.Content.Load<Texture2D>("violetPlanet")),
+                (TypePlanet.Red, Globals.Content.Load<Texture2D>("redPlanet")),
             };
-            _padding = _textures[0].Width * 2;
+            _padding = _textures[0].Item2.Width * 2;
             _maxOffset = _padding / 2;
             DetermineGridSize(mapWidth, mapHeight);
         }
 
         private static void DetermineGridSize(int mapWidth, int mapHeight)
         {
-            var textureWidth = _textures[0].Width;
-            var textureHeight = _textures[0].Height;
+            var textureWidth = _textures[0].Item2.Width;
+            var textureHeight = _textures[0].Item2.Height;
 
             _columns = mapWidth / (textureWidth + _padding);
             _rows = mapHeight / (textureHeight + _padding);
@@ -43,16 +47,17 @@ namespace SpaceSurvival
             {
                 for (var column = 1; column < _columns; column++)
                 {
-                    var posX = column * (_textures[0].Width + _padding);
-                    var posY = row * (_textures[0].Height + _padding);
+                    var posX = column * (_textures[0].Item2.Width + _padding);
+                    var posY = row * (_textures[0].Item2.Height + _padding);
 
                     posX += _random.Next(-_maxOffset, _maxOffset + 1);
                     posY += _random.Next(-_maxOffset, _maxOffset + 1);
 
-                    var textureIndex = _random.Next(0, _textures.Length);
+                    var textureIndex = _random.Next(0, _textures.Count);
                     var position = new Vector2(posX, posY);
 
-                    Planets.Add(new Planet(_textures[textureIndex], position, 1f));
+                    Planets.Add(new PlanetSprite(_textures[textureIndex].Item2, position, _textures[textureIndex].Item1,
+                        planetScale));
                 }
             }
 
@@ -62,9 +67,7 @@ namespace SpaceSurvival
         public static void Update()
         {
             foreach (var planet in Planets)
-            {
                 planet.Update();
-            }
         }
 
         public static void Draw()

@@ -3,5 +3,9 @@
 public enum Scenes
 {
     SpaceScene,
-    PlanetScene
+    PlanetScene,
+    GreenPlanet,
+    RedPlanet,
+    IcePlanet,
+    VioletPlanet,
 }

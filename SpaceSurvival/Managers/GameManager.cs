@@ -1,15 +1,11 @@
-﻿using System;
-
-namespace SpaceSurvival;
+﻿namespace SpaceSurvival;
 
 public class GameManager
 {
     private readonly SceneManager _sceneManager;
-    public Ship Ship { get; }
 
     public GameManager()
     {
-        Ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"), Vector2.Zero, 1f);
         _sceneManager = new SceneManager(this);
     }
 
@@ -17,9 +13,11 @@ public class GameManager
     public void Update()
     {
         if (InputManager.KeyPressed(Keys.Z))
-            _sceneManager.SwitchScene(Scenes.SpaceScene);
+            SceneManager.SwitchScene(Scenes.SpaceScene);
         if (InputManager.KeyPressed(Keys.X))
-            _sceneManager.SwitchScene(Scenes.PlanetScene);
+            SceneManager.SwitchScene(Scenes.PlanetScene);
+        if (InputManager.KeyPressed(Keys.C))
+            SceneManager.SwitchScene(Scenes.GreenPlanet);
         InputManager.Update();
         _sceneManager.Update();
     }

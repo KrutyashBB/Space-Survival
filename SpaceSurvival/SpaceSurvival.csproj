@@ -15,6 +15,7 @@
         <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
         <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="RogueSharp" Version="4.2.0" />
         <PackageReference Include="TiledCS" Version="3.3.3" />
     </ItemGroup>
     <Target Name="RestoreDotnetTools" BeforeTargets="Restore">

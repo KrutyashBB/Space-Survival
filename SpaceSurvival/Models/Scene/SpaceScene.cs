@@ -2,6 +2,8 @@
 
 public class SpaceScene : Scene
 {
+    private Ship ship;
+
     private Sprite _background;
     private Matrix _translation;
 
@@ -12,14 +14,15 @@ public class SpaceScene : Scene
     protected override void Load()
     {
         _background = new Sprite(Globals.Content.Load<Texture2D>("bg-space"), new Vector2(0, 0), 3f);
+        ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
+            new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
         PlanetManager.Init(_background.Size.X, _background.Size.Y);
         PlanetManager.CreatePlanets();
     }
 
     public override void Activate()
     {
-        GameManager.Ship.Position = new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f);
-        GameManager.Ship.SetBounds(_background.Size);
+        ship.SetBounds(_background.Size);
     }
 
     public void CalculateTranslation(Sprite target, Sprite screen)
@@ -34,16 +37,39 @@ public class SpaceScene : Scene
 
     public override void Update()
     {
-        GameManager.Ship.Update();
+        ship.Update();
         PlanetManager.Update();
-        CalculateTranslation(GameManager.Ship, _background);
+        CalculateTranslation(ship, _background);
+
+        foreach (var planet in PlanetManager.Planets)
+        {
+            if (ship.Rect.Intersects(planet.Rect))
+            {
+                planet.IsCollision = true;
+                if (InputManager.KeyPressed(Keys.Tab))
+                {
+                    if (planet.Type == TypePlanet.Green)
+                        SceneManager.SwitchScene(Scenes.GreenPlanet);
+                    if (planet.Type == TypePlanet.Red)
+                        SceneManager.SwitchScene(Scenes.RedPlanet);
+                    if (planet.Type == TypePlanet.Ice)
+                        SceneManager.SwitchScene(Scenes.IcePlanet);
+                    if (planet.Type == TypePlanet.Violet)
+                        SceneManager.SwitchScene(Scenes.VioletPlanet);
+                }
+            }
+            else
+            {
+                planet.IsCollision = false;
+            }
+        }
     }
 
     protected override void Draw()
     {
         _background.Draw();
         PlanetManager.Draw();
-        GameManager.Ship.Draw();
+        ship.Draw();
     }
 
     public override RenderTarget2D GetFrame()

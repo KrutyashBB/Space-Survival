@@ -3,11 +3,10 @@
 public class Sprite
 {
     public Point Size { get; private set; }
+    public Vector2 Position;
     protected float Scale;
     protected readonly Texture2D Texture;
     protected readonly Vector2 Origin;
-    public Vector2 Position;
-    protected readonly int Speed = 300;
 
     public Sprite(Texture2D tex, Vector2 pos, float scale)
     {

@@ -69,8 +69,8 @@ namespace SpaceSurvival
             var index = y * layer.width + x;
             var gid = layer.data[index];
 
-            var tileX = (int)(x * _map.TileWidth * Scale);
-            var tileY = (int)(y * _map.TileHeight * Scale);
+            var tileX = x * _tileWidth;
+            var tileY = y * _tileHeight;
 
 
             if (gid == 0)
