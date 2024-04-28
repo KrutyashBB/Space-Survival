@@ -4,9 +4,10 @@ namespace SpaceSurvival;
 
 public class GreenPlanet : Scene
 {
-    private MapGenerate map;
+    private MapGenerate _map;
     private HeroForMapGenerator _player;
-    private int Scale = 4;
+    private EnemyManager _enemyManager;
+    private int Scale = 1;
 
     private Matrix _translation;
     private readonly Random _rand = new();
@@ -32,36 +33,41 @@ public class GreenPlanet : Scene
 
     protected override void Load()
     {
+        var randWalkableTex = _isWalkableTexturesSource[_rand.Next(_isWalkableTexturesSource.Length)];
+        var randNotWalkableTex = _isNotWalkableTexturesSource[_rand.Next(_isNotWalkableTexturesSource.Length)];
+
+        _map = new MapGenerate(Scale, _tileSetForMap, randWalkableTex, randNotWalkableTex);
+        _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"), _map.GetRandomEmptyCell(), Scale);
+
+        _enemyManager = new EnemyManager(_player, _map, Scale);
+        _enemyManager.AddEnemies(6);
     }
 
 
     public override void Activate()
     {
-        var randWalkableTex = _isWalkableTexturesSource[_rand.Next(_isWalkableTexturesSource.Length)];
-        var randNotWalkableTex = _isNotWalkableTexturesSource[_rand.Next(_isNotWalkableTexturesSource.Length)];
-        
-        map = new MapGenerate(Scale, _tileSetForMap, randWalkableTex, randNotWalkableTex);
-        _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"), map.GetRandomEmptyCell(), Scale);
     }
 
     private void CalculateTranslation()
     {
         var dx = _player.Position.X - Globals.WindowSize.X / 2f;
-        dx = MathHelper.Clamp(dx, 0, map.MapSize.X - Globals.WindowSize.X);
+        dx = MathHelper.Clamp(dx, 0, _map.MapSize.X - Globals.WindowSize.X);
         var dy = _player.Position.Y - Globals.WindowSize.Y / 2f;
-        dy = MathHelper.Clamp(dy, 0, map.MapSize.Y - Globals.WindowSize.Y);
+        dy = MathHelper.Clamp(dy, 0, _map.MapSize.Y - Globals.WindowSize.Y);
         _translation = Matrix.CreateTranslation(-dx, -dy, 0f);
     }
 
     public override void Update()
     {
         _player.Update();
+        _enemyManager.Update();
         CalculateTranslation();
     }
 
     protected override void Draw()
     {
-        map.Draw();
+        _map.Draw();
+        _enemyManager.Draw();
         _player.Draw();
     }
 

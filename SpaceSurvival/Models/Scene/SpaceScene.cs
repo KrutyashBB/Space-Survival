@@ -13,7 +13,7 @@ public class SpaceScene : Scene
 
     protected override void Load()
     {
-        _background = new Sprite(Globals.Content.Load<Texture2D>("bg-space"), new Vector2(0, 0), 3f);
+        _background = new Sprite(Globals.Content.Load<Texture2D>("bg-space"), new Vector2(0, 0), 4f);
         ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
         PlanetManager.Init(_background.Size.X, _background.Size.Y);

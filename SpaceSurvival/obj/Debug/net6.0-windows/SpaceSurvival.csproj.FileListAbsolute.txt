@@ -58,3 +58,5 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\FireSet.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\IceSet.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\DarkCastle.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\enemy.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\path.xnb

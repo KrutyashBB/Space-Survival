@@ -8,6 +8,8 @@ public static class InputManager
     private static KeyboardState _lastKeyboard;
     private static KeyboardState _currentKeyboard;
 
+    public static KeyboardState KeyboardState { get; private set; }
+
 
     public static bool KeyPressed(Keys key)
     {
@@ -16,16 +18,16 @@ public static class InputManager
 
     public static void Update()
     {
-        var keyboardState = Keyboard.GetState();
+        KeyboardState = Keyboard.GetState();
 
         _direction = Vector2.Zero;
-        if (keyboardState.IsKeyDown(Keys.Up))
+        if (KeyboardState.IsKeyDown(Keys.Up))
             _direction.Y++;
-        if (keyboardState.IsKeyDown(Keys.Down))
+        if (KeyboardState.IsKeyDown(Keys.Down))
             _direction.Y--;
-        if (keyboardState.IsKeyDown(Keys.Left))
+        if (KeyboardState.IsKeyDown(Keys.Left))
             _direction.X--;
-        if (keyboardState.IsKeyDown(Keys.Right))
+        if (KeyboardState.IsKeyDown(Keys.Right))
             _direction.X++;
 
         _lastKeyboard = _currentKeyboard;
