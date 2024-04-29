@@ -25,7 +25,7 @@ public class PathToPlayer
 
     public void CreateFrom(int x, int y)
     {
-        _cells = _pathFinder.ShortestPath(_map.GetCell(x, y),
+        _cells = _pathFinder.TryFindShortestPath(_map.GetCell(x, y),
             _map.GetCell((int)_player.Coords.X, (int)_player.Coords.Y));
     }
 

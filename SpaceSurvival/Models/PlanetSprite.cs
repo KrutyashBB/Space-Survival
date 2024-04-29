@@ -4,12 +4,12 @@ namespace SpaceSurvival;
 
 public class PlanetSprite : Sprite
 {
+    public Rectangle Rect { get; private set; }
     public TypePlanet Type;
     
     private float _rotation;
     private readonly float _rotationSpeed = 0.3f;
     private readonly float _randomSpeed;
-    public Rectangle Rect { get; private set; }
 
     public bool IsCollision = false;
     private readonly SpriteFont _font;
@@ -22,7 +22,7 @@ public class PlanetSprite : Sprite
         _randomSpeed = (float)random.NextDouble();
         
         Scale = scale;
-        Rect = new Rectangle((int)(pos.X - Size.X / 5f), (int)(pos.Y - Size.Y / 4f), Size.X, Size.Y);
+        Rect = new Rectangle((int)pos.X - Size.X / 2, (int)pos.Y - Size.Y / 2, Size.X, Size.Y);
 
         _font = Globals.Content.Load<SpriteFont>("font");
     }

@@ -34,35 +34,39 @@ public class SpaceScene : Scene
         _translation = Matrix.CreateTranslation(-dx, -dy, 0);
     }
 
-
-    public override void Update()
+    private void CheckCollisionWithPlanet()
     {
-        ship.Update();
-        PlanetManager.Update();
-        CalculateTranslation(ship, _background);
-
         foreach (var planet in PlanetManager.Planets)
         {
             if (ship.Rect.Intersects(planet.Rect))
             {
                 planet.IsCollision = true;
                 if (InputManager.KeyPressed(Keys.Tab))
-                {
-                    if (planet.Type == TypePlanet.Green)
-                        SceneManager.SwitchScene(Scenes.GreenPlanet);
-                    if (planet.Type == TypePlanet.Red)
-                        SceneManager.SwitchScene(Scenes.RedPlanet);
-                    if (planet.Type == TypePlanet.Ice)
-                        SceneManager.SwitchScene(Scenes.IcePlanet);
-                    if (planet.Type == TypePlanet.Violet)
-                        SceneManager.SwitchScene(Scenes.VioletPlanet);
-                }
+                    LoadPlanetScene(planet);
             }
             else
-            {
                 planet.IsCollision = false;
-            }
         }
+    }
+
+    private void LoadPlanetScene(PlanetSprite planet)
+    {
+        if (planet.Type == TypePlanet.Green)
+            SceneManager.SwitchScene(Scenes.GreenPlanet);
+        if (planet.Type == TypePlanet.Red)
+            SceneManager.SwitchScene(Scenes.RedPlanet);
+        if (planet.Type == TypePlanet.Ice)
+            SceneManager.SwitchScene(Scenes.IcePlanet);
+        if (planet.Type == TypePlanet.Violet)
+            SceneManager.SwitchScene(Scenes.VioletPlanet);
+    }
+
+    public override void Update()
+    {
+        ship.Update();
+        PlanetManager.Update();
+        CalculateTranslation(ship, _background);
+        CheckCollisionWithPlanet();
     }
 
     protected override void Draw()

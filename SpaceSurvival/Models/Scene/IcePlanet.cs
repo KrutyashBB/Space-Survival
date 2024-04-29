@@ -27,8 +27,9 @@ public class IcePlanet : Scene
         new(64, 32, 16, 16),
         new(16, 48, 16, 16),
     };
-    public IcePlanet(GameManager gameManager) : base(gameManager)
+    public IcePlanet(GameManager gameManager, int scale) : base(gameManager)
     {
+        Scale = scale;
     }
 
     protected override void Load()

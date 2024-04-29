@@ -4,11 +4,11 @@ namespace SpaceSurvival;
 
 public class Ship : Sprite
 {
-    private float _rotation;
     private const float RotationSpeed = 3f;
-    private Vector2 _minPos, _maxPos;
     private const int BaseSpeed = 300;
     private const int AccelerationSpeed = 500;
+    private float _rotation;
+    private Vector2 _minPos, _maxPos;
     private int _currentSpeed;
     public Rectangle Rect { get; private set; }
 
@@ -26,8 +26,9 @@ public class Ship : Sprite
 
     public void Update()
     {
-        Rect = new Rectangle((int)Position.X, (int)Position.Y, Size.X, Size.Y);
-        
+        var minSize = Math.Min(Size.X, Size.Y);
+        Rect = new Rectangle((int)Position.X - minSize / 2, (int)Position.Y - minSize / 2, minSize, minSize);
+
         _rotation += InputManager.Direction.X * RotationSpeed * Globals.TotalSeconds;
         Vector2 direction = new((float)Math.Sin(_rotation), -(float)Math.Cos(_rotation));
         _currentSpeed = InputManager.KeyboardState.IsKeyDown(Keys.LeftShift) ? AccelerationSpeed : BaseSpeed;

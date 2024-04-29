@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SpaceSurvival;
 
@@ -29,13 +30,13 @@ public class GreenPlanet : Scene
         new(112, 32, 16, 16),
     };
 
-    public GreenPlanet(GameManager gameManager) : base(gameManager)
+    public GreenPlanet(GameManager gameManager, int scale) : base(gameManager)
     {
+        Scale = scale;
     }
 
     protected override void Load()
     {
-        
     }
 
 
@@ -47,7 +48,7 @@ public class GreenPlanet : Scene
         _map = new MapGenerate(Scale, _tileSetForMap, randWalkableTex, randNotWalkableTex);
         _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"), _map.GetRandomEmptyCell(), Scale);
         UpdatePlayerFieldOfView();
-        
+
         _lootManager = new LootManager(_map, Scale);
         _lootManager.AddLoot(LootType.Type1, 4);
         _lootManager.AddLoot(LootType.Type2, 8);
@@ -55,7 +56,7 @@ public class GreenPlanet : Scene
 
         _enemyManager = new EnemyManager(_player, _map, Scale);
         _enemyManager.CreateEnemies(6);
-        
+
         CombatManager.Init(_player, _enemyManager.GetEnemies());
     }
 
@@ -79,6 +80,11 @@ public class GreenPlanet : Scene
         _player.Update();
         _enemyManager.Update();
         CalculateTranslation();
+
+
+        var loot = _lootManager.Loots.FirstOrDefault(loot => _player.Coords == loot.Coords);
+        if (loot != null)
+            _lootManager.Loots.Remove(loot);
     }
 
     protected override void Draw()

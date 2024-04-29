@@ -27,8 +27,9 @@ public class RedPlanet : Scene
         new(64, 32, 16, 16),
     };
 
-    public RedPlanet(GameManager gameManager) : base(gameManager)
+    public RedPlanet(GameManager gameManager, int scale) : base(gameManager)
     {
+        Scale = scale;
     }
 
     protected override void Load()

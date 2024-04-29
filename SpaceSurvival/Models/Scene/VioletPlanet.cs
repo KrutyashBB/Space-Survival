@@ -25,8 +25,9 @@ public class VioletPlanet : Scene
         new(0, 0, 16, 16),
         new(64, 48, 16, 16),
     };
-    public VioletPlanet(GameManager gameManager) : base(gameManager)
+    public VioletPlanet(GameManager gameManager, int scale) : base(gameManager)
     {
+        Scale = scale;
     }
 
     protected override void Load()

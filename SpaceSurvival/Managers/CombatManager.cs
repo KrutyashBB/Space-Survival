@@ -7,7 +7,7 @@ namespace SpaceSurvival;
 public static class CombatManager
 {
     private static HeroForMapGenerator _hero;
-    private static List<Enemy> _enemies;
+    private static List<Enemy> _enemies = new();
 
     public static void Init(HeroForMapGenerator hero, List<Enemy> enemies)
     {
