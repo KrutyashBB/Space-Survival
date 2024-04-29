@@ -3,7 +3,6 @@
 public enum Scenes
 {
     SpaceScene,
-    PlanetScene,
     GreenPlanet,
     RedPlanet,
     IcePlanet,

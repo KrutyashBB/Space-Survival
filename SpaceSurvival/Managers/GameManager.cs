@@ -14,8 +14,6 @@ public class GameManager
     {
         if (InputManager.KeyPressed(Keys.Z))
             SceneManager.SwitchScene(Scenes.SpaceScene);
-        if (InputManager.KeyPressed(Keys.X))
-            SceneManager.SwitchScene(Scenes.PlanetScene);
         if (InputManager.KeyPressed(Keys.C))
             SceneManager.SwitchScene(Scenes.GreenPlanet);
         InputManager.Update();

@@ -1,11 +1,23 @@
-﻿namespace SpaceSurvival;
+﻿using System;
+using System.Linq;
+
+namespace SpaceSurvival;
 
 public class PlanetScene : Scene
 {
-    private readonly MapRenderer _map = new();
-    private readonly Hero _hero = new();
-    private Matrix _translation;
+    protected MapGenerate Map;
+    protected HeroForMapGenerator Player;
+    protected int Scale = 3;
 
+    protected EnemyManager EnemyManager;
+    protected LootManager LootManager;
+
+    private Matrix _translation;
+    private readonly Random _rand = new();
+    
+    protected Texture2D TileSetForMap;
+    protected Rectangle[] WalkableTexturesSource;
+    protected Rectangle[] NotWalkableTexturesSource;
 
     public PlanetScene(GameManager gameManager) : base(gameManager)
     {
@@ -15,27 +27,50 @@ public class PlanetScene : Scene
     {
     }
 
+
     public override void Activate()
     {
+        var randWalkableTex = WalkableTexturesSource[_rand.Next(WalkableTexturesSource.Length)];
+        var randNotWalkableTex = NotWalkableTexturesSource[_rand.Next(NotWalkableTexturesSource.Length)];
+
+        Map = new MapGenerate(Scale, TileSetForMap, randWalkableTex, randNotWalkableTex);
+        Player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"), Map.GetRandomEmptyCell(), Scale);
+        UpdatePlayerFieldOfView();
+    }
+
+    private void UpdatePlayerFieldOfView()
+    {
+        MapGenerate.Map.ComputeFov((int)Player.Coords.X, (int)Player.Coords.Y, 10, true);
+    }
+
+    private void CalculateTranslation()
+    {
+        var dx = Player.Position.X - Globals.WindowSize.X / 2f;
+        dx = MathHelper.Clamp(dx, 0, Map.MapSize.X - Globals.WindowSize.X);
+        var dy = Player.Position.Y - Globals.WindowSize.Y / 2f;
+        dy = MathHelper.Clamp(dy, 0, Map.MapSize.Y - Globals.WindowSize.Y);
+        _translation = Matrix.CreateTranslation(-dx, -dy, 0f);
     }
 
     public override void Update()
     {
-        _hero.Update();
-        CalculateTranslation(_hero.Position);
-    }
+        UpdatePlayerFieldOfView();
+        Player.Update();
+        EnemyManager.Update();
+        CalculateTranslation();
 
-    public void CalculateTranslation(Vector2 target)
-    {
-        var dx = target.X - Globals.WindowSize.X / 2f;
-        var dy = target.Y - Globals.WindowSize.Y / 2f;
-        _translation = Matrix.CreateTranslation(-dx, -dy, 0);
+
+        var loot = LootManager.Loots.FirstOrDefault(loot => Player.Coords == loot.Coords);
+        if (loot != null)
+            LootManager.Loots.Remove(loot);
     }
 
     protected override void Draw()
     {
-        _map.Draw();
-        _hero.Draw();
+        Map.Draw();
+        LootManager.Draw();
+        EnemyManager.Draw();
+        Player.Draw();
     }
 
     public override RenderTarget2D GetFrame()
