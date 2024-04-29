@@ -23,7 +23,6 @@ public class MapGenerate
     public MapGenerate(int scale, Texture2D tileSet, Rectangle isWalkableTex, Rectangle isNotWalkableTex)
     {
         Map = Map.Create(new CaveMapCreationStrategy<Map>(MapWidth, MapHeight, 45, 2, 20));
-
         _scale = scale;
         _tileWidth = isWalkableTex.Width * _scale;
         _tileHeight = isWalkableTex.Height * _scale;
@@ -51,10 +50,14 @@ public class MapGenerate
         {
             var x = random.Next(MapWidth - 1);
             var y = random.Next(MapHeight - 1);
-            if (Map.IsWalkable(x, y))
+            // if (Map.IsWalkable(x, y))
+            // {
+            //     var cell = Map.GetCell(x, y);
+            //     return new Vector2(cell.X, cell.Y);
+            // }
+            if (_mapCells[y, x])
             {
-                var cell = Map.GetCell(x, y);
-                return new Vector2(cell.X, cell.Y);
+                return new Vector2(x, y);
             }
         }
     }

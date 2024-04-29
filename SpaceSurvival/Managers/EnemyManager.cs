@@ -18,17 +18,21 @@ public class EnemyManager
         _scale = scale;
     }
 
-    public void AddEnemies(int count)
+    public void CreateEnemies(int count)
     {
         for (var i = 0; i < count; i++)
         {
             var enemyCoords = _map.GetRandomEmptyCell();
-            var pathToPlayer = new PathToPlayer(_hero, MapGenerate.Map, Globals.Content.Load<Texture2D>("path"), _scale);
+            var pathToPlayer =
+                new PathToPlayer(_hero, MapGenerate.Map, Globals.Content.Load<Texture2D>("path"), _scale);
             pathToPlayer.CreateFrom((int)enemyCoords.X, (int)enemyCoords.Y);
-            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale, pathToPlayer);
+            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale, pathToPlayer,
+                MapGenerate.Map);
             _enemies.Add(enemy);
         }
     }
+
+    public List<Enemy> GetEnemies() => _enemies;
 
     public void Update()
     {

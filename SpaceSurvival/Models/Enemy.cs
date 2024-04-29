@@ -1,43 +1,59 @@
-﻿
+﻿using System;
+
 namespace SpaceSurvival;
 
-public class Enemy : Sprite
+public class Enemy : Unit
 {
-    private Vector2 Coords;
-    // private PathToPlayer Path;
-
-    private PathToPlayer Path;
-
+    public Vector2 Coords;
     private Vector2 _newPosition;
+
+    private readonly IMap _map;
+    private readonly PathToPlayer _path;
+
+    private bool isAwareOfPlayer;
 
     private float _movementTimer;
     private const float MovementDelay = 0.8f;
 
 
-    public Enemy(Texture2D tex, Vector2 pos, float scale, PathToPlayer path) : base(tex, pos, scale)
+    public Enemy(Texture2D tex, Vector2 pos, float scale, PathToPlayer path, IMap map) : base(tex, pos, scale)
     {
-        Path = path;
+        _path = path;
+        _map = map;
         Coords = pos;
         Position = new Vector2(Coords.X * tex.Width * scale, Coords.Y * tex.Height * scale);
         _newPosition = Position;
+
+        Health = 40;
+        Damage = 5;
+        Name = "Enemy";
     }
 
     public void Update()
     {
+        if (!_map.IsInFov((int)Coords.X, (int)Coords.Y))
+            return;
+
         _movementTimer += Globals.TotalSeconds;
 
         if (_movementTimer > MovementDelay)
         {
-            Path.CreateFrom((int)Coords.X, (int)Coords.Y);
-            if (!Path.IsNearThePlayer)
+            _path.CreateFrom((int)Coords.X, (int)Coords.Y);
+
+            if (!_path.IsNearThePlayer)
             {
-                var cell = Path.StepForward;
+                var cell = _path.StepForward;
                 if (cell != null)
                 {
                     Coords.X = cell.X;
                     Coords.Y = cell.Y;
                     _newPosition = new Vector2(Coords.X * Texture.Width * Scale, Coords.Y * Texture.Height * Scale);
                 }
+            }
+            else
+            {
+                var cell = _path.StepForward;
+                CombatManager.Attack(this, CombatManager.UnitAt(cell.X, cell.Y));
             }
 
             _movementTimer = 0;

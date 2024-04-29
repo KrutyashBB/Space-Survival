@@ -6,8 +6,10 @@ public class GreenPlanet : Scene
 {
     private MapGenerate _map;
     private HeroForMapGenerator _player;
+    private int Scale = 3;
+
     private EnemyManager _enemyManager;
-    private int Scale = 1;
+    private LootManager _lootManager;
 
     private Matrix _translation;
     private readonly Random _rand = new();
@@ -33,19 +35,33 @@ public class GreenPlanet : Scene
 
     protected override void Load()
     {
-        var randWalkableTex = _isWalkableTexturesSource[_rand.Next(_isWalkableTexturesSource.Length)];
-        var randNotWalkableTex = _isNotWalkableTexturesSource[_rand.Next(_isNotWalkableTexturesSource.Length)];
-
-        _map = new MapGenerate(Scale, _tileSetForMap, randWalkableTex, randNotWalkableTex);
-        _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"), _map.GetRandomEmptyCell(), Scale);
-
-        _enemyManager = new EnemyManager(_player, _map, Scale);
-        _enemyManager.AddEnemies(6);
+        
     }
 
 
     public override void Activate()
     {
+        var randWalkableTex = _isWalkableTexturesSource[_rand.Next(_isWalkableTexturesSource.Length)];
+        var randNotWalkableTex = _isNotWalkableTexturesSource[_rand.Next(_isNotWalkableTexturesSource.Length)];
+
+        _map = new MapGenerate(Scale, _tileSetForMap, randWalkableTex, randNotWalkableTex);
+        _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"), _map.GetRandomEmptyCell(), Scale);
+        UpdatePlayerFieldOfView();
+        
+        _lootManager = new LootManager(_map, Scale);
+        _lootManager.AddLoot(LootType.Type1, 4);
+        _lootManager.AddLoot(LootType.Type2, 8);
+        _lootManager.AddLoot(LootType.Type3, 2);
+
+        _enemyManager = new EnemyManager(_player, _map, Scale);
+        _enemyManager.CreateEnemies(6);
+        
+        CombatManager.Init(_player, _enemyManager.GetEnemies());
+    }
+
+    private void UpdatePlayerFieldOfView()
+    {
+        MapGenerate.Map.ComputeFov((int)_player.Coords.X, (int)_player.Coords.Y, 10, true);
     }
 
     private void CalculateTranslation()
@@ -59,6 +75,7 @@ public class GreenPlanet : Scene
 
     public override void Update()
     {
+        UpdatePlayerFieldOfView();
         _player.Update();
         _enemyManager.Update();
         CalculateTranslation();
@@ -67,6 +84,7 @@ public class GreenPlanet : Scene
     protected override void Draw()
     {
         _map.Draw();
+        _lootManager.Draw();
         _enemyManager.Draw();
         _player.Draw();
     }
