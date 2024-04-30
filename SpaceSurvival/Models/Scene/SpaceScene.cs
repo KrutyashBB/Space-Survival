@@ -1,8 +1,14 @@
-﻿namespace SpaceSurvival;
+﻿using System.Collections.Generic;
+
+namespace SpaceSurvival;
 
 public class SpaceScene : Scene
 {
-    private Ship ship;
+    private Ship _ship;
+
+    private readonly List<EnemyShip> _enemies = new();
+    private FollowMovementEnemyShip _followMovement;
+    // private PatrolMovementEnemyShip _patrolMovement;
 
     private Sprite _background;
     private Matrix _translation;
@@ -14,18 +20,28 @@ public class SpaceScene : Scene
     protected override void Load()
     {
         _background = new Sprite(Globals.Content.Load<Texture2D>("bg-space"), new Vector2(0, 0), 4f);
-        ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
+        _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
+
+        // _patrolMovement = new PatrolMovementEnemyShip();
+        // _patrolMovement.GenerateWay(20, _background.Size);
+
+        _followMovement = new FollowMovementEnemyShip { Target = _ship };
+
+        for (var i = 0; i < 5; i++)
+            _enemies.Add(new EnemyShip(Globals.Content.Load<Texture2D>("tiny_ship8"), new(800 * i, 50), 1f)
+                { MoveEnemy = new PatrolMovementEnemyShip(10, _background.Size) });
+
         PlanetManager.Init(_background.Size.X, _background.Size.Y);
         PlanetManager.CreatePlanets();
     }
 
     public override void Activate()
     {
-        ship.SetBounds(_background.Size);
+        _ship.SetBounds(_background.Size);
     }
 
-    public void CalculateTranslation(Sprite target, Sprite screen)
+    private void CalculateTranslation(Sprite target, Sprite screen)
     {
         var dx = target.Position.X - Globals.WindowSize.X / 2f;
         dx = MathHelper.Clamp(dx, 0, screen.Size.X - Globals.WindowSize.X);
@@ -38,7 +54,7 @@ public class SpaceScene : Scene
     {
         foreach (var planet in PlanetManager.Planets)
         {
-            if (ship.Rect.Intersects(planet.Rect))
+            if (_ship.Rect.Intersects(planet.Rect))
             {
                 planet.IsCollision = true;
                 if (InputManager.KeyPressed(Keys.Tab))
@@ -49,7 +65,7 @@ public class SpaceScene : Scene
         }
     }
 
-    private void LoadPlanetScene(PlanetSprite planet)
+    private static void LoadPlanetScene(PlanetSprite planet)
     {
         if (planet.Type == TypePlanet.Green)
             SceneManager.SwitchScene(Scenes.GreenPlanet);
@@ -63,9 +79,20 @@ public class SpaceScene : Scene
 
     public override void Update()
     {
-        ship.Update();
+        _ship.Update();
+
+        foreach (var enemy in _enemies)
+        {
+            var dir = _ship.Position - enemy.Position;
+            if (dir.Length() < 200 && enemy.MoveEnemy is PatrolMovementEnemyShip)
+                enemy.MoveEnemy = _followMovement;
+            else if (dir.Length() > 200 && enemy.MoveEnemy is FollowMovementEnemyShip)
+                enemy.MoveEnemy = new PatrolMovementEnemyShip(10, _background.Size);
+            enemy.Update();
+        }
+
         PlanetManager.Update();
-        CalculateTranslation(ship, _background);
+        CalculateTranslation(_ship, _background);
         CheckCollisionWithPlanet();
     }
 
@@ -73,7 +100,9 @@ public class SpaceScene : Scene
     {
         _background.Draw();
         PlanetManager.Draw();
-        ship.Draw();
+        foreach (var enemy in _enemies)
+            enemy.Draw();
+        _ship.Draw();
     }
 
     public override RenderTarget2D GetFrame()

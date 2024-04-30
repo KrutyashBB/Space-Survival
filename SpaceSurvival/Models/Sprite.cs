@@ -7,6 +7,7 @@ public class Sprite
     protected float Scale;
     protected readonly Texture2D Texture;
     protected readonly Vector2 Origin;
+    public int Speed;
 
     public Sprite(Texture2D tex, Vector2 pos, float scale)
     {
