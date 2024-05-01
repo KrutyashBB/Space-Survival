@@ -37,6 +37,13 @@ public class PatrolMovementEnemyShip : MovementEnemyShips
         if (_path.Count < 0) return;
 
         var dir = _path[_current] - enemyShip.Position;
+        
+        var rotation = (float)Math.Atan2(dir.Y, dir.X);
+        rotation = MathHelper.ToDegrees(rotation);
+        rotation += 90;
+        rotation = MathHelper.ToRadians(rotation);
+        enemyShip.Rotation = rotation;
+        
         if (dir.Length() > 4)
         {
             dir.Normalize();

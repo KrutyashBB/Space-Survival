@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SpaceSurvival;
 
@@ -8,7 +9,6 @@ public class SpaceScene : Scene
 
     private readonly List<EnemyShip> _enemies = new();
     private FollowMovementEnemyShip _followMovement;
-    // private PatrolMovementEnemyShip _patrolMovement;
 
     private Sprite _background;
     private Matrix _translation;
@@ -23,15 +23,14 @@ public class SpaceScene : Scene
         _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
 
-        // _patrolMovement = new PatrolMovementEnemyShip();
-        // _patrolMovement.GenerateWay(20, _background.Size);
-
         _followMovement = new FollowMovementEnemyShip { Target = _ship };
 
         for (var i = 0; i < 5; i++)
             _enemies.Add(new EnemyShip(Globals.Content.Load<Texture2D>("tiny_ship8"), new(800 * i, 50), 1f)
                 { MoveEnemy = new PatrolMovementEnemyShip(10, _background.Size) });
-
+        
+        ProjectileManager.Init();
+        
         PlanetManager.Init(_background.Size.X, _background.Size.Y);
         PlanetManager.CreatePlanets();
     }
@@ -65,6 +64,15 @@ public class SpaceScene : Scene
         }
     }
 
+    private void CheckCollisionWithBullets()
+    {
+        foreach (var bullet in ProjectileManager.Projectiles)
+        {
+            if (_ship.Rect.Intersects(bullet.Rect))
+                Console.WriteLine("Hit");
+        }
+    }
+
     private static void LoadPlanetScene(PlanetSprite planet)
     {
         if (planet.Type == TypePlanet.Green)
@@ -84,13 +92,15 @@ public class SpaceScene : Scene
         foreach (var enemy in _enemies)
         {
             var dir = _ship.Position - enemy.Position;
-            if (dir.Length() < 200 && enemy.MoveEnemy is PatrolMovementEnemyShip)
+            if (dir.Length() < 500 && enemy.MoveEnemy is PatrolMovementEnemyShip)
                 enemy.MoveEnemy = _followMovement;
-            else if (dir.Length() > 200 && enemy.MoveEnemy is FollowMovementEnemyShip)
+            else if (dir.Length() > 500 && enemy.MoveEnemy is FollowMovementEnemyShip)
                 enemy.MoveEnemy = new PatrolMovementEnemyShip(10, _background.Size);
             enemy.Update();
         }
 
+        ProjectileManager.Update();
+        CheckCollisionWithBullets();
         PlanetManager.Update();
         CalculateTranslation(_ship, _background);
         CheckCollisionWithPlanet();
@@ -100,6 +110,7 @@ public class SpaceScene : Scene
     {
         _background.Draw();
         PlanetManager.Draw();
+        ProjectileManager.Draw();
         foreach (var enemy in _enemies)
             enemy.Draw();
         _ship.Draw();

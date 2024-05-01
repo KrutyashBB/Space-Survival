@@ -7,7 +7,7 @@ public class PlanetScene : Scene
 {
     protected MapGenerate Map;
     protected HeroForMapGenerator Player;
-    protected int Scale = 3;
+    protected int Scale = 5;
 
     protected EnemyManager EnemyManager;
     protected LootManager LootManager;

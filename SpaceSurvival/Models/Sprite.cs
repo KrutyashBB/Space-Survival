@@ -6,8 +6,9 @@ public class Sprite
     public Vector2 Position;
     protected float Scale;
     protected readonly Texture2D Texture;
-    protected readonly Vector2 Origin;
+    public readonly Vector2 Origin;
     public int Speed;
+    public float Rotation = 0;
 
     public Sprite(Texture2D tex, Vector2 pos, float scale)
     {
@@ -20,6 +21,6 @@ public class Sprite
 
     public virtual void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 1f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation, Vector2.Zero, Scale, SpriteEffects.None, 1f);
     }
 }
