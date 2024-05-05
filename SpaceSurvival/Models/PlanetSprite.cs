@@ -4,24 +4,24 @@ namespace SpaceSurvival;
 
 public class PlanetSprite : Sprite
 {
+    public int Id { get; private set; }
     public Rectangle Rect { get; private set; }
-    public TypePlanet Type;
-    
+
     private float _rotation;
-    private readonly float _rotationSpeed = 0.3f;
+    private const float RotationSpeed = 0.3f;
     private readonly float _randomSpeed;
 
     public bool IsCollision = false;
     private readonly SpriteFont _font;
 
-    public PlanetSprite(Texture2D tex, Vector2 pos, TypePlanet type, int scale) : base(tex, pos, scale)
+    public PlanetSprite(int id, Texture2D tex, Vector2 pos, int scale) : base(tex, pos, scale)
     {
-        Type = type;
-        
+        Id = id;
+        Scale = scale;
+
         var random = new Random();
         _randomSpeed = (float)random.NextDouble();
-        
-        Scale = scale;
+
         Rect = new Rectangle((int)pos.X - Size.X / 2, (int)pos.Y - Size.Y / 2, Size.X, Size.Y);
 
         _font = Globals.Content.Load<SpriteFont>("font");
@@ -29,7 +29,7 @@ public class PlanetSprite : Sprite
 
     public void Update()
     {
-        _rotation += _randomSpeed * _rotationSpeed * Globals.TotalSeconds;
+        _rotation += _randomSpeed * RotationSpeed * Globals.TotalSeconds;
     }
 
     public override void Draw()

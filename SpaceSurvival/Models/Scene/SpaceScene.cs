@@ -7,15 +7,13 @@ public class SpaceScene : Scene
 {
     private Ship _ship;
 
-    private readonly List<EnemyShip> _enemies = new();
-    private FollowMovementEnemyShip _followMovement;
+    // private readonly List<EnemyShip> _enemies = new();
+    // private FollowMovementEnemyShip _followMovement;
+
+    private EnemyShipManager _enemyShipManager;
 
     private Sprite _background;
     private Matrix _translation;
-
-    public SpaceScene(GameManager gameManager) : base(gameManager)
-    {
-    }
 
     protected override void Load()
     {
@@ -23,14 +21,13 @@ public class SpaceScene : Scene
         _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
 
-        _followMovement = new FollowMovementEnemyShip { Target = _ship };
-
-        for (var i = 0; i < 5; i++)
-            _enemies.Add(new EnemyShip(Globals.Content.Load<Texture2D>("tiny_ship8"), new(800 * i, 50), 1f)
-                { MoveEnemy = new PatrolMovementEnemyShip(10, _background.Size) });
+        FollowMovementEnemyShip.Target = _ship;
+        PatrolMovementEnemyShip.Range = _background.Size;
+        
+        _enemyShipManager = new EnemyShipManager(10, _background.Size);
         
         ProjectileManager.Init();
-        
+
         PlanetManager.Init(_background.Size.X, _background.Size.Y);
         PlanetManager.CreatePlanets();
     }
@@ -75,30 +72,13 @@ public class SpaceScene : Scene
 
     private static void LoadPlanetScene(PlanetSprite planet)
     {
-        if (planet.Type == TypePlanet.Green)
-            SceneManager.SwitchScene(Scenes.GreenPlanet);
-        if (planet.Type == TypePlanet.Red)
-            SceneManager.SwitchScene(Scenes.RedPlanet);
-        if (planet.Type == TypePlanet.Ice)
-            SceneManager.SwitchScene(Scenes.IcePlanet);
-        if (planet.Type == TypePlanet.Violet)
-            SceneManager.SwitchScene(Scenes.VioletPlanet);
+        SceneManager.SwitchScene(planet.Id);
     }
 
     public override void Update()
     {
         _ship.Update();
-
-        foreach (var enemy in _enemies)
-        {
-            var dir = _ship.Position - enemy.Position;
-            if (dir.Length() < 500 && enemy.MoveEnemy is PatrolMovementEnemyShip)
-                enemy.MoveEnemy = _followMovement;
-            else if (dir.Length() > 500 && enemy.MoveEnemy is FollowMovementEnemyShip)
-                enemy.MoveEnemy = new PatrolMovementEnemyShip(10, _background.Size);
-            enemy.Update();
-        }
-
+        _enemyShipManager.Update(_ship);
         ProjectileManager.Update();
         CheckCollisionWithBullets();
         PlanetManager.Update();
@@ -111,8 +91,7 @@ public class SpaceScene : Scene
         _background.Draw();
         PlanetManager.Draw();
         ProjectileManager.Draw();
-        foreach (var enemy in _enemies)
-            enemy.Draw();
+        _enemyShipManager.Draw();
         _ship.Draw();
     }
 

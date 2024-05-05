@@ -2,16 +2,16 @@
 
 namespace SpaceSurvival;
 
-public class EnemyManager
+public class PlanetEnemyManager
 {
-    private readonly List<Enemy> _enemies = new();
+    public List<Enemy> Enemies { get; private set; } = new();
 
     private readonly HeroForMapGenerator _hero;
     private readonly MapGenerate _map;
 
     private readonly int _scale;
 
-    public EnemyManager(HeroForMapGenerator hero, MapGenerate map, int scale)
+    public PlanetEnemyManager(HeroForMapGenerator hero, MapGenerate map, int scale)
     {
         _map = map;
         _hero = hero;
@@ -24,25 +24,26 @@ public class EnemyManager
         {
             var enemyCoords = _map.GetRandomEmptyCell();
             var pathToPlayer =
-                new PathToPlayer(_hero, MapGenerate.Map, Globals.Content.Load<Texture2D>("path"), _scale);
+                new PathToPlayer(_hero, _map.Map, Globals.Content.Load<Texture2D>("path"), _scale);
             pathToPlayer.CreateFrom((int)enemyCoords.X, (int)enemyCoords.Y);
-            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale, pathToPlayer,
-                MapGenerate.Map);
-            _enemies.Add(enemy);
+            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale, 
+                pathToPlayer, _map.Map);
+            Enemies.Add(enemy);
         }
     }
 
-    public List<Enemy> GetEnemies() => _enemies;
 
     public void Update()
     {
-        foreach (var enemy in _enemies)
+        foreach (var enemy in Enemies)
             enemy.Update();
+
+        Enemies.RemoveAll(enemy => enemy.Health <= 0);
     }
 
     public void Draw()
     {
-        foreach (var enemy in _enemies)
+        foreach (var enemy in Enemies)
             enemy.Draw();
     }
 }

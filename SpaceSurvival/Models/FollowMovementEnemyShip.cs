@@ -4,7 +4,7 @@ namespace SpaceSurvival;
 
 public class FollowMovementEnemyShip : MovementEnemyShips
 {
-    public Ship Target { get; set; }
+    public static Ship Target { get; set; }
 
     public override void Move(Sprite enemyShip)
     {

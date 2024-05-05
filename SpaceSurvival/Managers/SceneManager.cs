@@ -2,35 +2,36 @@
 
 namespace SpaceSurvival;
 
-public class SceneManager
+public static class SceneManager
 {
-    private static Scenes ActiveScene { get; set; }
-    private static readonly Dictionary<Scenes, Scene> _scenes = new();
+    private static int ActiveScene { get; set; }
+    private static Dictionary<int, Scene> _scenes = new();
 
-    public SceneManager(GameManager gameManager)
+    public static void Init()
     {
-        _scenes.Add(Scenes.SpaceScene, new SpaceScene(gameManager));
-        _scenes.Add(Scenes.GreenPlanet, new GreenPlanet(gameManager));
-        _scenes.Add(Scenes.RedPlanet, new RedPlanet(gameManager));
-        _scenes.Add(Scenes.IcePlanet, new IcePlanet(gameManager));
-        _scenes.Add(Scenes.VioletPlanet, new VioletPlanet(gameManager));
-        
-        ActiveScene = Scenes.SpaceScene;
+        _scenes.Add(0, new SpaceScene());
+
+        ActiveScene = 0;
         _scenes[ActiveScene].Activate();
     }
 
-    public static void SwitchScene(Scenes scene)
+    public static void AddScene(int id, TypePlanet typePlanet)
     {
-        ActiveScene = scene;
+        _scenes.Add(id, new PlanetScene(typePlanet));
+    }
+
+    public static void SwitchScene(int id)
+    {
+        ActiveScene = id;
         _scenes[ActiveScene].Activate();
     }
 
-    public void Update()
+    public static void Update()
     {
         _scenes[ActiveScene].Update();
     }
 
-    public RenderTarget2D GetFrame()
+    public static RenderTarget2D GetFrame()
     {
         return _scenes[ActiveScene].GetFrame();
     }

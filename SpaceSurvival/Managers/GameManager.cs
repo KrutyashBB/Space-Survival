@@ -2,27 +2,24 @@
 
 public class GameManager
 {
-    private readonly SceneManager _sceneManager;
-
     public GameManager()
     {
-        _sceneManager = new SceneManager(this);
+        SceneManager.Init();
     }
 
 
     public void Update()
     {
         if (InputManager.KeyPressed(Keys.Z))
-            SceneManager.SwitchScene(Scenes.SpaceScene);
-        if (InputManager.KeyPressed(Keys.C))
-            SceneManager.SwitchScene(Scenes.GreenPlanet);
+            SceneManager.SwitchScene(0);
+        
         InputManager.Update();
-        _sceneManager.Update();
+        SceneManager.Update();
     }
 
     public void Draw()
     {
-        var frame = _sceneManager.GetFrame();
+        var frame = SceneManager.GetFrame();
         Globals.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         Globals.SpriteBatch.Draw(frame, Vector2.Zero, Color.White);
         Globals.SpriteBatch.End();

@@ -6,7 +6,6 @@ public class Projectile : Sprite
 {
     public Vector2 Direction { get; set; }
     public float LifeSpan { get; private set; }
-
     public Rectangle Rect { get; private set; }
 
     public Projectile(Texture2D tex, ProjectileData data, float scale) : base(tex, data.Position, scale)

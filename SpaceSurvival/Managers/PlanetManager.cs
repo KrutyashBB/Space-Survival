@@ -43,6 +43,7 @@ namespace SpaceSurvival
 
         public static void CreatePlanets()
         {
+            var planetId = 1;
             for (var row = 1; row < _rows; row++)
             {
                 for (var column = 1; column < _columns; column++)
@@ -56,8 +57,9 @@ namespace SpaceSurvival
                     var textureIndex = _random.Next(0, _textures.Count);
                     var position = new Vector2(posX, posY);
 
-                    Planets.Add(new PlanetSprite(_textures[textureIndex].Item2, position, _textures[textureIndex].Item1,
-                        planetScale));
+                    Planets.Add(new PlanetSprite(planetId, _textures[textureIndex].Item2, position, planetScale));
+                    SceneManager.AddScene(planetId, _textures[textureIndex].Item1);
+                    planetId++;
                 }
             }
 

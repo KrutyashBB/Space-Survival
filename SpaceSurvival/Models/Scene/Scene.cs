@@ -3,11 +3,9 @@
 public abstract class Scene
 {
     protected readonly RenderTarget2D Target;
-    protected readonly GameManager GameManager;
 
-    protected Scene(GameManager gameManager)
+    protected Scene()
     {
-        GameManager = gameManager;
         Target = Globals.GetNewRenderTarget();
         Load();
     }

@@ -6,28 +6,22 @@ namespace SpaceSurvival;
 public class PatrolMovementEnemyShip : MovementEnemyShips
 {
     private readonly List<Vector2> _path = new();
+    public static Point Range;
     private int _current;
 
     private readonly Random _random = new();
 
-    public PatrolMovementEnemyShip(int countPoints, Point range)
+    public PatrolMovementEnemyShip(int countPoints)
     {
-        GenerateWay(countPoints, range);
+        GenerateWay(countPoints);
     }
 
-    public void AddWayPoint(Vector2 point)
+    private void GenerateWay(int count)
     {
-        _path.Add(point);
-    }
-
-    public void GenerateWay(int count, Point range)
-    {
-        // _path.Clear();
-
         for (var i = 0; i < count; i++)
         {
-            float x = _random.Next(range.X);
-            float y = _random.Next(range.Y);
+            float x = _random.Next(Range.X);
+            float y = _random.Next(Range.Y);
             _path.Add(new Vector2(x, y));
         }
     }
@@ -37,13 +31,13 @@ public class PatrolMovementEnemyShip : MovementEnemyShips
         if (_path.Count < 0) return;
 
         var dir = _path[_current] - enemyShip.Position;
-        
+
         var rotation = (float)Math.Atan2(dir.Y, dir.X);
         rotation = MathHelper.ToDegrees(rotation);
         rotation += 90;
         rotation = MathHelper.ToRadians(rotation);
         enemyShip.Rotation = rotation;
-        
+
         if (dir.Length() > 4)
         {
             dir.Normalize();

@@ -9,7 +9,7 @@ public class PathToPlayer
     private readonly PathFinder _pathFinder;
     private Path _cells;
 
-    private int Scale;
+    private readonly int _scale;
 
     public PathToPlayer(HeroForMapGenerator player, IMap map, Texture2D sprite, int scale)
     {
@@ -17,7 +17,7 @@ public class PathToPlayer
         _map = map;
         _sprite = sprite;
         _pathFinder = new PathFinder(map);
-        Scale = scale;
+        _scale = scale;
     }
 
     public Cell StepForward => (Cell)_cells.TryStepForward();
@@ -34,8 +34,8 @@ public class PathToPlayer
         foreach (var cell in _cells.Steps)
         {
             Globals.SpriteBatch.Draw(_sprite,
-                new Vector2(cell.X * _sprite.Width * Scale, cell.Y * _sprite.Height * Scale),
-                null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+                new Vector2(cell.X * _sprite.Width * _scale, cell.Y * _sprite.Height * _scale),
+                null, Color.White, 0f, Vector2.Zero, _scale, SpriteEffects.None, 0f);
         }
     }
 }

@@ -6,10 +6,12 @@ public class EnemyShip : Sprite
 
     private double _timeSinceFire;
     private const double FireInterval = 0.25; // Interval between shots
-
+    
+    private readonly FollowMovementEnemyShip _followMovement;
 
     public EnemyShip(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
+        _followMovement = new FollowMovementEnemyShip();
         Speed = 150;
     }
 
@@ -25,8 +27,14 @@ public class EnemyShip : Sprite
         ProjectileManager.AddProjectile(pd);
     }
 
-    public void Update()
+    public void Update(Ship ship)
     {
+        var dir = ship.Position - Position;
+        if (dir.Length() < 500 && MoveEnemy is PatrolMovementEnemyShip)
+            MoveEnemy = _followMovement;
+        else if (dir.Length() > 500 && MoveEnemy is FollowMovementEnemyShip)
+            MoveEnemy = new PatrolMovementEnemyShip(10);
+        
         MoveEnemy.Move(this);
         if (MoveEnemy is FollowMovementEnemyShip)
         {
