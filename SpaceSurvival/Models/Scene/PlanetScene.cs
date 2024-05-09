@@ -11,6 +11,7 @@ public class PlanetScene : Scene
 
     private readonly PlanetEnemyManager _planetEnemyManager;
     private readonly LootManager _lootManager;
+    private readonly UIManager _uiManager;
 
     private Matrix _translation;
 
@@ -18,8 +19,7 @@ public class PlanetScene : Scene
     {
         _map = new MapGenerate(Scale, typePlanet);
         _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"),
-            _map.GetRandomEmptyCell(), Scale, _map.MapCells);
-        UpdatePlayerFieldOfView();
+            _map.GetRandomEmptyCell(), Scale, _map);
 
         _lootManager = new LootManager(_map, Scale);
         _lootManager.AddLoot(LootType.Type1, 2);
@@ -28,6 +28,9 @@ public class PlanetScene : Scene
 
         _planetEnemyManager = new PlanetEnemyManager(_player, _map, Scale);
         _planetEnemyManager.CreateEnemies(10);
+
+        _uiManager = new UIManager();
+        _uiManager.CreateInventoryPanel(new Vector2(_player.Position.X, _player.Position.Y));
     }
 
 
@@ -39,31 +42,33 @@ public class PlanetScene : Scene
     {
     }
 
-    private void UpdatePlayerFieldOfView()
-    {
-        _map.Map.ComputeFov((int)_player.Coords.X, (int)_player.Coords.Y, 10, true);
-    }
 
     private void CalculateTranslation()
     {
-        var dx = _player.Position.X - Globals.WindowSize.X / 2f;
+        var dx = _player.Position.X - Globals.WindowSize.X / 2f + _player.Size.X / 2f;
         dx = MathHelper.Clamp(dx, 0, _map.MapSize.X - Globals.WindowSize.X);
-        var dy = _player.Position.Y - Globals.WindowSize.Y / 2f;
+        var dy = _player.Position.Y - Globals.WindowSize.Y / 2f + _player.Size.Y / 2f;
         dy = MathHelper.Clamp(dy, 0, _map.MapSize.Y - Globals.WindowSize.Y);
         _translation = Matrix.CreateTranslation(-dx, -dy, 0f);
     }
 
-    public override void Update()
+    private void CheckCollisionWithLoot()
     {
-        UpdatePlayerFieldOfView();
-        _player.Update(_planetEnemyManager.Enemies);
-        _planetEnemyManager.Update();
-        CalculateTranslation();
-
-
         var loot = _lootManager.Loots.FirstOrDefault(loot => _player.Coords == loot.Coords);
         if (loot != null)
+        {
+            InventoryManager.AddToPlayerInventory(loot);
             _lootManager.Loots.Remove(loot);
+        }
+    }
+
+    public override void Update()
+    {
+        _player.Update(_planetEnemyManager.Enemies);
+        _planetEnemyManager.Update();
+        _uiManager.Update(_player.Position, _map.MapSize);
+        CalculateTranslation();
+        CheckCollisionWithLoot();
     }
 
     protected override void Draw()
@@ -72,6 +77,7 @@ public class PlanetScene : Scene
         _lootManager.Draw();
         _planetEnemyManager.Draw();
         _player.Draw();
+        _uiManager.Draw();
     }
 
     public override RenderTarget2D GetFrame()

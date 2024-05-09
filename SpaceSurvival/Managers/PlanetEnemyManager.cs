@@ -4,7 +4,7 @@ namespace SpaceSurvival;
 
 public class PlanetEnemyManager
 {
-    public List<Enemy> Enemies { get; private set; } = new();
+    public List<Enemy> Enemies { get; } = new();
 
     private readonly HeroForMapGenerator _hero;
     private readonly MapGenerate _map;
@@ -26,7 +26,7 @@ public class PlanetEnemyManager
             var pathToPlayer =
                 new PathToPlayer(_hero, _map.Map, Globals.Content.Load<Texture2D>("path"), _scale);
             pathToPlayer.CreateFrom((int)enemyCoords.X, (int)enemyCoords.Y);
-            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale, 
+            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale,
                 pathToPlayer, _map.Map);
             Enemies.Add(enemy);
         }
@@ -44,6 +44,10 @@ public class PlanetEnemyManager
     public void Draw()
     {
         foreach (var enemy in Enemies)
+        {
+            if (Globals.DebugFlag)
+                if (!_map.Map.IsInFov((int)enemy.Coords.X, (int)enemy.Coords.Y)) continue;
             enemy.Draw();
+        }
     }
 }

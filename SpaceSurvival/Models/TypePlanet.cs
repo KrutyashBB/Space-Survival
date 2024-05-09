@@ -5,5 +5,6 @@ public enum TypePlanet
     Green,
     Red,
     Ice,
-    Violet
+    Violet,
+    Store
 }

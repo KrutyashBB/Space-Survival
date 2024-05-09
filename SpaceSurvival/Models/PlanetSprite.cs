@@ -5,18 +5,21 @@ namespace SpaceSurvival;
 public class PlanetSprite : Sprite
 {
     public int Id { get; private set; }
+    public TypePlanet TypePlanet { get; private set; }
     public Rectangle Rect { get; private set; }
 
     private float _rotation;
     private const float RotationSpeed = 0.3f;
     private readonly float _randomSpeed;
+    
 
-    public bool IsCollision = false;
+    public bool IsCollisionWithPlayerShip = false;
     private readonly SpriteFont _font;
 
-    public PlanetSprite(int id, Texture2D tex, Vector2 pos, int scale) : base(tex, pos, scale)
+    public PlanetSprite(int id, TypePlanet typePlanet, Texture2D tex, Vector2 pos, int scale) : base(tex, pos, scale)
     {
         Id = id;
+        TypePlanet = typePlanet;
         Scale = scale;
 
         var random = new Random();
@@ -36,8 +39,11 @@ public class PlanetSprite : Sprite
     {
         Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None,
             1f);
-        if (IsCollision)
+        if (TypePlanet == TypePlanet.Store)
+            Globals.SpriteBatch.DrawString(_font, "STORE", new Vector2(Position.X - Size.X * 0.2f, Position.Y - 30),
+                Color.Blue);
+        if (IsCollisionWithPlayerShip)
             Globals.SpriteBatch.DrawString(_font, "Click TAB",
-                new Vector2(Position.X - Size.X * 0.3f, Position.Y - Size.Y * 0.7f), Color.White);
+                new Vector2(Position.X - 70, Position.Y - Size.Y * 0.7f), Color.White);
     }
 }

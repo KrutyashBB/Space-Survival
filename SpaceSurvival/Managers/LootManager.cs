@@ -49,6 +49,10 @@ public class LootManager
     public void Draw()
     {
         foreach (var loot in Loots)
+        {
+            if (Globals.DebugFlag)
+                if (!_map.Map.IsInFov((int)loot.Coords.X, (int)loot.Coords.Y)) continue;
             loot.Draw();
+        }
     }
 }

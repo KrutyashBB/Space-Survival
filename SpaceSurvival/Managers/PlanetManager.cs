@@ -17,6 +17,8 @@ namespace SpaceSurvival
 
         private static int planetScale = 1;
 
+        private static bool IsStorePlanetCreated = false;
+
         public static void Init(int mapWidth, int mapHeight)
         {
             _random = new Random();
@@ -26,6 +28,7 @@ namespace SpaceSurvival
                 (TypePlanet.Ice, Globals.Content.Load<Texture2D>("icePlanet")),
                 (TypePlanet.Violet, Globals.Content.Load<Texture2D>("violetPlanet")),
                 (TypePlanet.Red, Globals.Content.Load<Texture2D>("redPlanet")),
+                (TypePlanet.Store, Globals.Content.Load<Texture2D>("SpaceStore"))
             };
             _padding = _textures[0].Item2.Width * 2;
             _maxOffset = _padding / 2;
@@ -57,8 +60,20 @@ namespace SpaceSurvival
                     var textureIndex = _random.Next(0, _textures.Count);
                     var position = new Vector2(posX, posY);
 
-                    Planets.Add(new PlanetSprite(planetId, _textures[textureIndex].Item2, position, planetScale));
-                    SceneManager.AddScene(planetId, _textures[textureIndex].Item1);
+                    if (textureIndex == 4 && IsStorePlanetCreated)
+                        textureIndex = _random.Next(0, _textures.Count - 1);
+
+                    Planets.Add(new PlanetSprite(planetId, _textures[textureIndex].Item1, _textures[textureIndex].Item2,
+                        position, planetScale));
+
+                    if (_textures[textureIndex].Item1 == TypePlanet.Store)
+                    {
+                        SceneManager.AddSpaceStoreScene(planetId);
+                        IsStorePlanetCreated = true;
+                    }
+                    else
+                        SceneManager.AddPlanetScene(planetId, _textures[textureIndex].Item1);
+
                     planetId++;
                 }
             }

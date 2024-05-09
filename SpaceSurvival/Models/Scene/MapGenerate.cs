@@ -5,12 +5,12 @@ namespace SpaceSurvival;
 
 public class MapGenerate
 {
-    public Map Map { get; private set; }
-    public Point MapSize;
+    public Map Map { get; }
+    public Point MapSize { get; }
     private const int MapWidth = 70;
     private const int MapHeight = 35;
 
-    public bool[,] MapCells { get; private set; } = new bool[MapHeight, MapWidth];
+    public bool[,] MapCells { get; } = new bool[MapHeight, MapWidth];
 
     private readonly int _tileWidth;
     private readonly int _tileHeight;
@@ -157,11 +157,10 @@ public class MapGenerate
         }
     }
 
-    private bool flag;
     public void Draw()
     {
         if (InputManager.KeyPressed(Keys.V))
-            flag = !flag;
+            Globals.DebugFlag = !Globals.DebugFlag;
         
         for (var y = 0; y < MapCells.GetLength(0); y++)
         {
@@ -171,7 +170,7 @@ public class MapGenerate
                 var tileY = y * _tileHeight;
                 
 
-                if (flag)
+                if (Globals.DebugFlag)
                     if (!Map.IsInFov(x, y)) 
                         continue;
                 

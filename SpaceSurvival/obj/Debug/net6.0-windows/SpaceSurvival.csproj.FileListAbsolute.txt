@@ -44,7 +44,6 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Tile2.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\TiledCS.dll
-C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\MasterSimple.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\font.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\floor.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\wall.xnb
@@ -61,3 +60,6 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\enemy.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\path.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\bullet.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Small_Blue_Panel.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Small_Orange_Cell.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\SpaceStore.xnb

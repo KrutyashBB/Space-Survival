@@ -15,7 +15,12 @@ public static class SceneManager
         _scenes[ActiveScene].Activate();
     }
 
-    public static void AddScene(int id, TypePlanet typePlanet)
+    public static void AddSpaceStoreScene(int id)
+    {
+        _scenes.Add(id, new StoreScene());
+    }
+
+    public static void AddPlanetScene(int id, TypePlanet typePlanet)
     {
         _scenes.Add(id, new PlanetScene(typePlanet));
     }

@@ -9,6 +9,7 @@ public static class Globals
     public static SpriteBatch SpriteBatch { get; set; }
     public static GraphicsDevice GraphicsDevice { get; set; }
     public static Point WindowSize { get; set; }
+    public static bool DebugFlag { get; set; } = false;
 
     public static RenderTarget2D GetNewRenderTarget()
     {

@@ -7,9 +7,6 @@ public class SpaceScene : Scene
 {
     private Ship _ship;
 
-    // private readonly List<EnemyShip> _enemies = new();
-    // private FollowMovementEnemyShip _followMovement;
-
     private EnemyShipManager _enemyShipManager;
 
     private Sprite _background;
@@ -52,25 +49,23 @@ public class SpaceScene : Scene
         {
             if (_ship.Rect.Intersects(planet.Rect))
             {
-                planet.IsCollision = true;
+                planet.IsCollisionWithPlayerShip = true;
                 if (InputManager.KeyPressed(Keys.Tab))
-                    LoadPlanetScene(planet);
+                    LoadScene(planet);
             }
             else
-                planet.IsCollision = false;
+                planet.IsCollisionWithPlayerShip = false;
         }
     }
 
     private void CheckCollisionWithBullets()
     {
         foreach (var bullet in ProjectileManager.Projectiles)
-        {
             if (_ship.Rect.Intersects(bullet.Rect))
                 Console.WriteLine("Hit");
-        }
     }
 
-    private static void LoadPlanetScene(PlanetSprite planet)
+    private static void LoadScene(PlanetSprite planet)
     {
         SceneManager.SwitchScene(planet.Id);
     }
