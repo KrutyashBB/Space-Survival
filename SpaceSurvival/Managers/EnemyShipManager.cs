@@ -50,6 +50,7 @@ public class EnemyShipManager
 
     public void Update(Ship ship)
     {
+        EnemyShips.RemoveAll(enemyShip => enemyShip.Health <= 0);
         foreach (var enemyShip in EnemyShips)
             enemyShip.Update(ship);
     }

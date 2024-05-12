@@ -16,9 +16,9 @@ public class UIManager
         _smallBluePanel = new SmallBluePanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), pos, 0.4f);
     }
 
-    public void Update(Vector2 playerPos, Point mapSize)
+    public void Update(Vector2 playerPos, Point playerSize, Point mapSize)
     {
-        _smallBluePanel.Update(playerPos, mapSize);
+        _smallBluePanel.Update(playerPos, playerSize, mapSize);
     }
 
     public void Draw()

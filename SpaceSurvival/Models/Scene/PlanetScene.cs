@@ -55,7 +55,7 @@ public class PlanetScene : Scene
     private void CheckCollisionWithLoot()
     {
         var loot = _lootManager.Loots.FirstOrDefault(loot => _player.Coords == loot.Coords);
-        if (loot != null)
+        if (loot != null && InventoryManager.CapacityPlayerInventory > 0)
         {
             InventoryManager.AddToPlayerInventory(loot);
             _lootManager.Loots.Remove(loot);
@@ -66,7 +66,7 @@ public class PlanetScene : Scene
     {
         _player.Update(_planetEnemyManager.Enemies);
         _planetEnemyManager.Update();
-        _uiManager.Update(_player.Position, _map.MapSize);
+        _uiManager.Update(_player.Position, _player.Size, _map.MapSize);
         CalculateTranslation();
         CheckCollisionWithLoot();
     }

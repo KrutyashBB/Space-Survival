@@ -18,11 +18,13 @@ public class SpaceScene : Scene
         _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
 
+        _ship.SetBounds(_background.Size);
+
         FollowMovementEnemyShip.Target = _ship;
         PatrolMovementEnemyShip.Range = _background.Size;
-        
+
         _enemyShipManager = new EnemyShipManager(10, _background.Size);
-        
+
         ProjectileManager.Init();
 
         PlanetManager.Init(_background.Size.X, _background.Size.Y);
@@ -31,7 +33,6 @@ public class SpaceScene : Scene
 
     public override void Activate()
     {
-        _ship.SetBounds(_background.Size);
     }
 
     private void CalculateTranslation(Sprite target, Sprite screen)
@@ -58,12 +59,41 @@ public class SpaceScene : Scene
         }
     }
 
-    private void CheckCollisionWithBullets()
+    private readonly List<Projectile> _bulletsToRemove = new();
+
+    private void CheckCollisionBulletWithUnit()
     {
         foreach (var bullet in ProjectileManager.Projectiles)
-            if (_ship.Rect.Intersects(bullet.Rect))
-                Console.WriteLine("Hit");
+        {
+            HitPlayer(bullet);
+            HitEnemyShip(bullet);
+        }
+
+        foreach (var bullet in _bulletsToRemove)
+            ProjectileManager.Projectiles.Remove(bullet);
     }
+
+    private void HitPlayer(Projectile bullet)
+    {
+        if (_ship.Rect.Intersects(bullet.Rect) && bullet.Type == ProjectileType.EnemyBullet)
+        {
+            _bulletsToRemove.Add(bullet);
+            _ship.Health -= bullet.Damage;
+        }
+    }
+
+    private void HitEnemyShip(Projectile bullet)
+    {
+        foreach (var enemyShip in _enemyShipManager.EnemyShips)
+        {
+            if (enemyShip.Rect.Intersects(bullet.Rect) && bullet.Type == ProjectileType.PlayerBullet)
+            {
+                _bulletsToRemove.Add(bullet);
+                enemyShip.Health -= bullet.Damage;
+            }
+        }
+    }
+
 
     private static void LoadScene(PlanetSprite planet)
     {
@@ -75,7 +105,7 @@ public class SpaceScene : Scene
         _ship.Update();
         _enemyShipManager.Update(_ship);
         ProjectileManager.Update();
-        CheckCollisionWithBullets();
+        CheckCollisionBulletWithUnit();
         PlanetManager.Update();
         CalculateTranslation(_ship, _background);
         CheckCollisionWithPlanet();

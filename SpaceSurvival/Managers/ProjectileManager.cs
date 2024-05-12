@@ -9,7 +9,7 @@ public static class ProjectileManager
 
     public static void Init()
     {
-        _texture = Globals.Content.Load<Texture2D>("bullet");
+        _texture = Globals.Content.Load<Texture2D>("redBullet");
     }
 
     public static void AddProjectile(ProjectileData data)

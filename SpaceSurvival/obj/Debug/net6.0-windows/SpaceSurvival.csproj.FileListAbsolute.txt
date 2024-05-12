@@ -51,7 +51,6 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\player.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\greenPlanet.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\icePlanet.xnb
-C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\redPlanet.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\violetPlanet.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\BasicGreen.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\FireSet.xnb
@@ -63,3 +62,5 @@ C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-win
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Small_Blue_Panel.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\Small_Orange_Cell.xnb
 C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\SpaceStore.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\redBullet.xnb
+C:\Users\Krutyash\RiderProjects\SpaceSurvival\SpaceSurvival\bin\Debug\net6.0-windows\Content\redPlanet.xnb

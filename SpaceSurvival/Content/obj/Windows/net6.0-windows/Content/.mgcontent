@@ -17,6 +17,7 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/IceSet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/path.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/player.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/redBullet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/redPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Blue_Panel.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Orange_Cell.png</File>
@@ -26,6 +27,7 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
