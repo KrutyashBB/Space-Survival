@@ -4,25 +4,28 @@ namespace SpaceSurvival;
 
 public static class SceneManager
 {
+    public static int Id { get; private set; }
     private static int ActiveScene { get; set; }
-    private static Dictionary<int, Scene> _scenes = new();
+    private static Dictionary<int, Scene> _scenes;
 
     public static void Init()
     {
-        _scenes.Add(0, new SpaceScene());
+        Id = 0;
+        _scenes = new Dictionary<int, Scene>();
 
-        ActiveScene = 0;
+        ActiveScene = Id;
+        _scenes.Add(Id++, new SpaceScene());
         _scenes[ActiveScene].Activate();
     }
 
-    public static void AddSpaceStoreScene(int id)
+    public static void AddSpaceStoreScene()
     {
-        _scenes.Add(id, new StoreScene());
+        _scenes.Add(Id++, new StoreScene());
     }
 
-    public static void AddPlanetScene(int id, TypePlanet typePlanet)
+    public static void AddPlanetScene(TypePlanet typePlanet)
     {
-        _scenes.Add(id, new PlanetScene(typePlanet));
+        _scenes.Add(Id++, new PlanetScene(typePlanet));
     }
 
     public static void SwitchScene(int id)

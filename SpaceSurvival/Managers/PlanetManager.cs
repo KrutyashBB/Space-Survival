@@ -6,22 +6,27 @@ namespace SpaceSurvival
 {
     public static class PlanetManager
     {
-        public static List<PlanetSprite> Planets { get; } = new();
-
+        public static List<PlanetSprite> Planets { get; private set; }
         private static List<(TypePlanet, Texture2D)> _textures;
-        private static Random _random;
         private static int _columns;
         private static int _rows;
         private static int _padding;
         private static int _maxOffset;
+        private static Random _random;
 
-        private static int planetScale = 1;
+        private static int MapWidth;
+        private static int MapHeight;
 
-        private static bool IsStorePlanetCreated = false;
+        private const int PlanetScale = 1;
+
+        private static bool _isStorePlanetCreated;
 
         public static void Init(int mapWidth, int mapHeight)
         {
-            _random = new Random();
+            MapWidth = mapWidth;
+            MapHeight = mapHeight;
+
+            Planets = new List<PlanetSprite>();
             _textures = new List<(TypePlanet, Texture2D)>
             {
                 (TypePlanet.Green, Globals.Content.Load<Texture2D>("greenPlanet")),
@@ -33,6 +38,8 @@ namespace SpaceSurvival
             _padding = _textures[0].Item2.Width * 2;
             _maxOffset = _padding / 2;
             DetermineGridSize(mapWidth, mapHeight);
+
+            _random = new Random();
         }
 
         private static void DetermineGridSize(int mapWidth, int mapHeight)
@@ -46,35 +53,37 @@ namespace SpaceSurvival
 
         public static void CreatePlanets()
         {
-            var planetId = 1;
-            for (var row = 1; row < _rows; row++)
+            for (var row = 0; row <= _rows; row++)
             {
-                for (var column = 1; column < _columns; column++)
+                for (var column = 0; column <= _columns; column += _random.Next(2, 5))
                 {
-                    var posX = column * (_textures[0].Item2.Width + _padding);
-                    var posY = row * (_textures[0].Item2.Height + _padding);
+                    var textureIndex = _random.Next(0, _textures.Count);
+                    if (_textures[textureIndex].Item1 == TypePlanet.Store && _isStorePlanetCreated)
+                        textureIndex = _random.Next(0, _textures.Count - 1);
+
+                    var posX = column * (_textures[textureIndex].Item2.Width + _padding);
+                    var posY = row * (_textures[textureIndex].Item2.Height + _padding);
 
                     posX += _random.Next(-_maxOffset, _maxOffset + 1);
                     posY += _random.Next(-_maxOffset, _maxOffset + 1);
 
-                    var textureIndex = _random.Next(0, _textures.Count);
+                    posX = (int)MathHelper.Clamp(posX, _textures[textureIndex].Item2.Width * PlanetScale / 2f,
+                        MapWidth);
+                    posY = (int)MathHelper.Clamp(posY, _textures[textureIndex].Item2.Height * PlanetScale / 2f,
+                        MapHeight);
                     var position = new Vector2(posX, posY);
 
-                    if (textureIndex == 4 && IsStorePlanetCreated)
-                        textureIndex = _random.Next(0, _textures.Count - 1);
-
-                    Planets.Add(new PlanetSprite(planetId, _textures[textureIndex].Item1, _textures[textureIndex].Item2,
-                        position, planetScale));
+                    Planets.Add(new PlanetSprite(SceneManager.Id, _textures[textureIndex].Item1,
+                        _textures[textureIndex].Item2,
+                        position, PlanetScale));
 
                     if (_textures[textureIndex].Item1 == TypePlanet.Store)
                     {
-                        SceneManager.AddSpaceStoreScene(planetId);
-                        IsStorePlanetCreated = true;
+                        SceneManager.AddSpaceStoreScene();
+                        _isStorePlanetCreated = true;
                     }
                     else
-                        SceneManager.AddPlanetScene(planetId, _textures[textureIndex].Item1);
-
-                    planetId++;
+                        SceneManager.AddPlanetScene(_textures[textureIndex].Item1);
                 }
             }
 

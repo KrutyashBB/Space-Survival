@@ -31,7 +31,7 @@ public class EnemyShip : Unit
             Rotation = Rotation,
             LifeSpan = 3f,
             Damage = Damage,
-            Speed = 400
+            Speed = 500
         };
         ProjectileManager.AddProjectile(pd);
     }
