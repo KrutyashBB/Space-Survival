@@ -10,14 +10,17 @@ public class SpaceScene : Scene
     private EnemyShipManager _enemyShipManager;
 
     private Sprite _background;
+    private InventoryBtn _inventoryBtn;
+
     private Matrix _translation;
 
     protected override void Load()
     {
         _background = new Sprite(Globals.Content.Load<Texture2D>("bg-space"), new Vector2(0, 0), 4f);
+        _inventoryBtn = new InventoryBtn(Globals.Content.Load<Texture2D>("Small_Orange_Cell"), Vector2.Zero, 0.5f);
+
         _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
-
         _ship.SetBounds(_background.Size);
 
         FollowMovementEnemyShip.Target = _ship;
@@ -51,7 +54,7 @@ public class SpaceScene : Scene
             if (_ship.Rect.Intersects(planet.Rect))
             {
                 planet.IsCollisionWithPlayerShip = true;
-                if (InputManager.KeyPressed(Keys.Tab))
+                if (InputManager.KeyboardKeyPressed(Keys.W))
                     LoadScene(planet);
             }
             else
@@ -78,7 +81,7 @@ public class SpaceScene : Scene
         if (_ship.Rect.Intersects(bullet.Rect) && bullet.Type == ProjectileType.EnemyBullet)
         {
             _bulletsToRemove.Add(bullet);
-            _ship.Health -= bullet.Damage;
+            _ship.CurrentHealth -= bullet.Damage;
         }
     }
 
@@ -89,7 +92,7 @@ public class SpaceScene : Scene
             if (enemyShip.Rect.Intersects(bullet.Rect) && bullet.Type == ProjectileType.PlayerBullet)
             {
                 _bulletsToRemove.Add(bullet);
-                enemyShip.Health -= bullet.Damage;
+                enemyShip.CurrentHealth -= bullet.Damage;
             }
         }
     }
@@ -102,7 +105,11 @@ public class SpaceScene : Scene
 
     public override void Update()
     {
+        if (InputManager.KeyboardKeyPressed(Keys.Tab))
+            SceneManager.SwitchScene((int)TypeScene.PlayerShipScene);
+        
         _ship.Update();
+        _inventoryBtn.Update(_ship.Position, _background.Size);
         _enemyShipManager.Update(_ship);
         ProjectileManager.Update();
         CheckCollisionBulletWithUnit();
@@ -118,6 +125,7 @@ public class SpaceScene : Scene
         ProjectileManager.Draw();
         _enemyShipManager.Draw();
         _ship.Draw();
+        _inventoryBtn.Draw();
     }
 
     public override RenderTarget2D GetFrame()

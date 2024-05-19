@@ -2,6 +2,13 @@
 
 namespace SpaceSurvival;
 
+public enum TypeScene
+{
+    PlayerDeathScene,
+    PlayerShipScene,
+    SpaceScene
+}
+
 public static class SceneManager
 {
     public static int Id { get; private set; }
@@ -10,11 +17,15 @@ public static class SceneManager
 
     public static void Init()
     {
-        Id = 0;
-        _scenes = new Dictionary<int, Scene>();
+        _scenes = new Dictionary<int, Scene>
+        {
+            { (int)TypeScene.PlayerDeathScene, new PlayerDeathScene() },
+            { (int)TypeScene.PlayerShipScene, new PlayerShipScene() }
+        };
+        Id = _scenes.Keys.Count;
 
-        ActiveScene = Id;
         _scenes.Add(Id++, new SpaceScene());
+        ActiveScene = (int)TypeScene.SpaceScene;
         _scenes[ActiveScene].Activate();
     }
 

@@ -38,7 +38,7 @@ public class PlanetEnemyManager
         foreach (var enemy in Enemies)
             enemy.Update();
 
-        Enemies.RemoveAll(enemy => enemy.Health <= 0);
+        Enemies.RemoveAll(enemy => enemy.CurrentHealth <= 0);
     }
 
     public void Draw()

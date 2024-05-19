@@ -4,17 +4,24 @@ namespace SpaceSurvival;
 
 public static class ProjectileManager
 {
-    private static Texture2D _texture;
+    private static Texture2D _enemyBulletTexture;
+    private static Texture2D _playerBulletTexture;
     public static List<Projectile> Projectiles { get; } = new();
 
     public static void Init()
     {
-        _texture = Globals.Content.Load<Texture2D>("redBullet");
+        _enemyBulletTexture = Globals.Content.Load<Texture2D>("redBullet");
+        _playerBulletTexture = Globals.Content.Load<Texture2D>("blueBullet");
     }
 
-    public static void AddProjectile(ProjectileData data)
+    public static void AddEnemyProjectile(ProjectileData data)
     {
-        Projectiles.Add(new Projectile(_texture, data, 1f));
+        Projectiles.Add(new Projectile(_enemyBulletTexture, data, 1f));
+    }
+
+    public static void AddPlayerProjectile(ProjectileData data)
+    {
+        Projectiles.Add(new Projectile(_playerBulletTexture, data, 1f));
     }
 
     public static void Update()

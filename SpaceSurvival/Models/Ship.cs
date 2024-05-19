@@ -4,21 +4,23 @@ namespace SpaceSurvival;
 
 public class Ship : Unit
 {
+    private readonly ProgressBar _healthBar;
+    public Rectangle Rect { get; private set; }
     private const float RotationSpeed = 3f;
     private const int BaseSpeed = 350;
     private const int AccelerationSpeed = 500;
-    // private float _rotation;
     private Vector2 _minPos, _maxPos;
     private int _currentSpeed;
-    public Rectangle Rect { get; private set; }
 
     public Ship(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
         Scale = scale;
         _currentSpeed = BaseSpeed;
 
-        Health = 100;
+        CurrentHealth = MaxHealth = 100;
         Damage = 5;
+
+        _healthBar = new ProgressBar(MaxHealth, Position, 0.2f);
     }
 
     private void Fire()
@@ -30,9 +32,9 @@ public class Ship : Unit
             Rotation = Rotation,
             LifeSpan = 3f,
             Damage = Damage,
-            Speed = 600
+            Speed = 650
         };
-        ProjectileManager.AddProjectile(pd);
+        ProjectileManager.AddPlayerProjectile(pd);
     }
 
     public void SetBounds(Point mapSize)
@@ -43,6 +45,14 @@ public class Ship : Unit
 
     public void Update()
     {
+        if (CurrentHealth <= 0)
+        {
+            SceneManager.SwitchScene((int)TypeScene.PlayerDeathScene);
+            CurrentHealth = MaxHealth;
+        }
+
+        _healthBar.Update(CurrentHealth, new Vector2(Position.X - Size.X / 2f, Position.Y - Size.Y * 0.9f));
+
         var minSize = Math.Min(Size.X, Size.Y);
         Rect = new Rectangle((int)Position.X - minSize / 2, (int)Position.Y - minSize / 2, minSize, minSize);
 
@@ -56,7 +66,7 @@ public class Ship : Unit
         Position += InputManager.Direction.Y * direction * _currentSpeed * Globals.TotalSeconds;
         Position = Vector2.Clamp(Position, _minPos, _maxPos);
 
-        if (InputManager.KeyPressed(Keys.Space))
+        if (InputManager.KeyboardKeyPressed(Keys.Space))
             Fire();
     }
 
@@ -64,5 +74,6 @@ public class Ship : Unit
     {
         Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None,
             1f);
+        _healthBar.Draw();
     }
 }

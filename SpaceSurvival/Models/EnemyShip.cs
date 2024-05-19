@@ -5,7 +5,8 @@ namespace SpaceSurvival;
 public class EnemyShip : Unit
 {
     public Rectangle Rect { get; private set; }
-
+    private ProgressBar _healthBar;
+        
     public MovementEnemyShips MoveEnemy { get; set; }
     private readonly FollowMovementEnemyShip _followMovement;
 
@@ -18,8 +19,10 @@ public class EnemyShip : Unit
         _followMovement = new FollowMovementEnemyShip();
         Speed = 150;
 
-        Health = 30;
+        CurrentHealth = MaxHealth = 30;
         Damage = 10;
+
+        _healthBar = new ProgressBar(MaxHealth, Position, 0.2f);
     }
 
     private void Fire()
@@ -33,7 +36,7 @@ public class EnemyShip : Unit
             Damage = Damage,
             Speed = 500
         };
-        ProjectileManager.AddProjectile(pd);
+        ProjectileManager.AddEnemyProjectile(pd);
     }
 
     private void ChangeMovementInRangePLayer(Ship ship)
@@ -49,6 +52,8 @@ public class EnemyShip : Unit
     {
         var minSize = Math.Min(Size.X, Size.Y);
         Rect = new Rectangle((int)Position.X - minSize / 2, (int)Position.Y - minSize / 2, minSize, minSize);
+        
+        _healthBar.Update(CurrentHealth, new Vector2(Position.X - Size.X / 2f, Position.Y - Size.Y * 0.9f));
 
         ChangeMovementInRangePLayer(ship);
         MoveEnemy.Move(this);
@@ -67,5 +72,6 @@ public class EnemyShip : Unit
     {
         Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None,
             1f);
+        _healthBar.Draw();
     }
 }

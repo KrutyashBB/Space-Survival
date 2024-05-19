@@ -11,7 +11,8 @@ public class PlanetScene : Scene
 
     private readonly PlanetEnemyManager _planetEnemyManager;
     private readonly LootManager _lootManager;
-    private readonly UIManager _uiManager;
+    
+    private SmallBluePanel _smallBluePanel;
 
     private Matrix _translation;
 
@@ -29,8 +30,8 @@ public class PlanetScene : Scene
         _planetEnemyManager = new PlanetEnemyManager(_player, _map, Scale);
         _planetEnemyManager.CreateEnemies(10);
 
-        _uiManager = new UIManager();
-        _uiManager.CreateInventoryPanel(new Vector2(_player.Position.X, _player.Position.Y));
+        _smallBluePanel =
+            new SmallBluePanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
     }
 
 
@@ -40,6 +41,8 @@ public class PlanetScene : Scene
 
     public override void Activate()
     {
+        _smallBluePanel =
+            new SmallBluePanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
     }
 
 
@@ -59,6 +62,7 @@ public class PlanetScene : Scene
         {
             InventoryManager.AddToPlayerInventory(loot);
             _lootManager.Loots.Remove(loot);
+            _smallBluePanel.FillCellWithLoot();
         }
     }
 
@@ -66,7 +70,7 @@ public class PlanetScene : Scene
     {
         _player.Update(_planetEnemyManager.Enemies);
         _planetEnemyManager.Update();
-        _uiManager.Update(_player.Position, _player.Size, _map.MapSize);
+        _smallBluePanel.Update(_player.Position, _player.Size, _map.MapSize);
         CalculateTranslation();
         CheckCollisionWithLoot();
     }
@@ -77,7 +81,7 @@ public class PlanetScene : Scene
         _lootManager.Draw();
         _planetEnemyManager.Draw();
         _player.Draw();
-        _uiManager.Draw();
+        _smallBluePanel.Draw();
     }
 
     public override RenderTarget2D GetFrame()

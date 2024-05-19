@@ -18,6 +18,6 @@ public class Loot : Sprite
 
     public override void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, _color, 0f, Vector2.Zero, Scale, SpriteEffects.None, 1f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, _color, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
     }
 }

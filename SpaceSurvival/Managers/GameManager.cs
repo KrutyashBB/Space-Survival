@@ -7,12 +7,14 @@ public class GameManager
         SceneManager.Init();
     }
 
-
     public void Update()
     {
-        if (InputManager.KeyPressed(Keys.Z))
-            SceneManager.SwitchScene(0);
-        
+        if (InputManager.KeyboardKeyPressed(Keys.Z))
+            SceneManager.SwitchScene((int)TypeScene.SpaceScene);
+        else if (InputManager.KeyboardKeyPressed(Keys.X))
+            SceneManager.SwitchScene((int)TypeScene.PlayerDeathScene);
+
+
         InputManager.Update();
         SceneManager.Update();
     }

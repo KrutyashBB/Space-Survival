@@ -12,6 +12,8 @@ public class Enemy : Unit
 
     private bool isAwareOfPlayer;
 
+    private ProgressBar _healthBar;
+
     private float _movementTimer;
     private const float MovementDelay = 0.8f;
 
@@ -26,14 +28,17 @@ public class Enemy : Unit
         Position = new Vector2(Coords.X * tex.Width * scale, Coords.Y * tex.Height * scale);
         _newPosition = Position;
 
-        Health = 15;
+        CurrentHealth = MaxHealth = 15;
         Damage = 5;
         Name = "Enemy";
+
+        _healthBar = new ProgressBar(MaxHealth, new Vector2(Position.X - Size.X * 0.3f, Position.Y - Size.Y / 2f),
+            0.2f);
     }
 
     public void TakeDamage(int damage)
     {
-        Health -= damage;
+        CurrentHealth -= damage;
     }
 
     public void Update()
@@ -42,6 +47,8 @@ public class Enemy : Unit
             return;
 
         _movementTimer += Globals.TotalSeconds;
+
+        _healthBar.Update(CurrentHealth, new Vector2(Position.X - Size.X * 0.3f, Position.Y - Size.Y / 2f));
 
         if (_movementTimer > MovementDelay)
         {
@@ -66,7 +73,7 @@ public class Enemy : Unit
 
     public override void Draw()
     {
-        // _path.Draw();
         base.Draw();
+        _healthBar.Draw();
     }
 }

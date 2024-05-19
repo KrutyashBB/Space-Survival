@@ -8,6 +8,9 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
 
+    private int minWidth = 1200;
+    private int minHeight = 900;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -19,8 +22,8 @@ public class Game1 : Game
     {
         Globals.WindowSize = new Point(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
             GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
-        _graphics.PreferredBackBufferWidth = 1024;
-        _graphics.PreferredBackBufferHeight = 768;
+        _graphics.PreferredBackBufferWidth = minWidth;
+        _graphics.PreferredBackBufferHeight = minHeight;
         Window.AllowUserResizing = true;
         _graphics.ApplyChanges();
 
@@ -40,6 +43,12 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
+        if (_graphics.PreferredBackBufferWidth < minWidth)
+            _graphics.PreferredBackBufferWidth = minWidth;
+        if (_graphics.PreferredBackBufferHeight < minHeight)
+            _graphics.PreferredBackBufferHeight = minHeight;
+        _graphics.ApplyChanges();
+
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();

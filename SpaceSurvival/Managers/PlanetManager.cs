@@ -69,7 +69,7 @@ namespace SpaceSurvival
 
                     posX = (int)MathHelper.Clamp(posX, _textures[textureIndex].Item2.Width * PlanetScale / 2f,
                         MapWidth);
-                    posY = (int)MathHelper.Clamp(posY, _textures[textureIndex].Item2.Height * PlanetScale / 2f,
+                    posY = (int)MathHelper.Clamp(posY, _textures[textureIndex].Item2.Height * PlanetScale / 2f + 100,
                         MapHeight);
                     var position = new Vector2(posX, posY);
 

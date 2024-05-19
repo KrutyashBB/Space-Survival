@@ -159,7 +159,7 @@ public class MapGenerate
 
     public void Draw()
     {
-        if (InputManager.KeyPressed(Keys.V))
+        if (InputManager.KeyboardKeyPressed(Keys.V))
             Globals.DebugFlag = !Globals.DebugFlag;
         
         for (var y = 0; y < MapCells.GetLength(0); y++)

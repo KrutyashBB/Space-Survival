@@ -4,14 +4,18 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/back.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/BasicGreen.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bg-space.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Big_Blue_Panel.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/blueBullet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bullet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/DarkCastle.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/enemy.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/FireSet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/floor.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/font.spritefont</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/front.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/greenPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/icePlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/IceSet.png</File>
@@ -21,12 +25,18 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/redPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Blue_Panel.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Orange_Cell.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/spaceIcon.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/SpaceStore.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/tiny_ship8.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/violetPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -43,7 +43,7 @@ public class PlanetSprite : Sprite
             Globals.SpriteBatch.DrawString(_font, "STORE", new Vector2(Position.X - Size.X * 0.2f, Position.Y - 30),
                 Color.Blue);
         if (IsCollisionWithPlayerShip)
-            Globals.SpriteBatch.DrawString(_font, "Click TAB",
-                new Vector2(Position.X - 70, Position.Y - Size.Y * 0.7f), Color.White);
+            Globals.SpriteBatch.DrawString(_font, "Click W",
+                new Vector2(Position.X - 50, Position.Y - Size.Y * 0.7f), Color.White);
     }
 }
