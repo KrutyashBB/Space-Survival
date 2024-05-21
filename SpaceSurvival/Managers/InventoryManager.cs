@@ -4,10 +4,18 @@ namespace SpaceSurvival;
 
 public static class InventoryManager
 {
-    public static readonly List<Loot> PlayerInventory = new();
+    public static List<Loot> PlayerInventory = new();
     public static int CapacityPlayerInventory = 2;
-    public static readonly List<Loot> ShipInventory = new();
+    public static List<Loot> ShipInventory = new();
     public static int CapacityShipInventory = 4;
+
+    public static void Init()
+    {
+        PlayerInventory = new List<Loot>();
+        CapacityPlayerInventory = 2;
+        ShipInventory = new List<Loot>();
+        CapacityShipInventory = 4;
+    }
 
     public static void AddToPlayerInventory(Loot loot)
     {

@@ -3,11 +3,12 @@
 public class PlayerDeathScene : Scene
 {
     private readonly SpriteFont _font = Globals.Content.Load<SpriteFont>("font");
-    private UiBtn _returnToGameBtn;
+    private StartOverBtn _returnToGameBtn;
 
     protected override void Load()
     {
-        _returnToGameBtn = new UiBtn(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), Vector2.Zero, 0.3f);
+        _returnToGameBtn = new StartOverBtn(Globals.Content.Load<Texture2D>("Small_Blue_Panel"),
+            new Vector2(Globals.WindowSize.X / 2f - 170, Globals.WindowSize.Y / 2f), 0.3f);
     }
 
     public override void Activate()
@@ -16,6 +17,7 @@ public class PlayerDeathScene : Scene
 
     public override void Update()
     {
+        _returnToGameBtn.Update();
     }
 
     protected override void Draw()

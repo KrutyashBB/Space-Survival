@@ -4,9 +4,9 @@ namespace SpaceSurvival;
 
 public enum LootType
 {
-    Type1,
-    Type2,
-    Type3
+    Gold,
+    Ruby,
+    Bronze
 }
 
 public class LootManager
@@ -23,27 +23,26 @@ public class LootManager
 
     public void AddLoot(LootType type, int count)
     {
-        var color = Color.White;
+        Texture2D texture = null;
         var value = 0;
         switch (type)
         {
-            case LootType.Type1:
-                color = Color.White;
-                value = 1;
+            case LootType.Gold:
+                texture = Globals.Content.Load<Texture2D>("ThingsToBuyAndCollect/topaz");
+                value = 3;
                 break;
-            case LootType.Type2:
-                color = Color.Red;
+            case LootType.Ruby:
+                texture = Globals.Content.Load<Texture2D>("ThingsToBuyAndCollect/gemstone");
                 value = 2;
                 break;
-            case LootType.Type3:
-                color = Color.Green;
-                value = 3;
+            case LootType.Bronze:
+                texture = Globals.Content.Load<Texture2D>("ThingsToBuyAndCollect/bronze");
+                value = 1;
                 break;
         }
 
         for (var i = 0; i < count; i++)
-            Loots.Add(new Loot(type, value, Globals.Content.Load<Texture2D>("path"),
-                _map.GetRandomEmptyCell(), color, _scale));
+            Loots.Add(new Loot(type, value, texture, _map.GetRandomEmptyCell(), _scale));
     }
 
     public void Draw()
@@ -51,7 +50,8 @@ public class LootManager
         foreach (var loot in Loots)
         {
             if (Globals.DebugFlag)
-                if (!_map.Map.IsInFov((int)loot.Coords.X, (int)loot.Coords.Y)) continue;
+                if (!_map.Map.IsInFov((int)loot.Coords.X, (int)loot.Coords.Y))
+                    continue;
             loot.Draw();
         }
     }

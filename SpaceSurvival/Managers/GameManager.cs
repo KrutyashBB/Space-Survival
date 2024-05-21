@@ -14,7 +14,6 @@ public class GameManager
         else if (InputManager.KeyboardKeyPressed(Keys.X))
             SceneManager.SwitchScene((int)TypeScene.PlayerDeathScene);
 
-
         InputManager.Update();
         SceneManager.Update();
     }

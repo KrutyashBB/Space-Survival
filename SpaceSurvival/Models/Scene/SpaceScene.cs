@@ -23,6 +23,8 @@ public class SpaceScene : Scene
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
         _ship.SetBounds(_background.Size);
 
+        InventoryManager.Init();
+
         FollowMovementEnemyShip.Target = _ship;
         PatrolMovementEnemyShip.Range = _background.Size;
 
@@ -107,7 +109,7 @@ public class SpaceScene : Scene
     {
         if (InputManager.KeyboardKeyPressed(Keys.Tab))
             SceneManager.SwitchScene((int)TypeScene.PlayerShipScene);
-        
+
         _ship.Update();
         _inventoryBtn.Update(_ship.Position, _background.Size);
         _enemyShipManager.Update(_ship);

@@ -19,6 +19,7 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/greenPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/icePlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/IceSet.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/landingBack.jpg</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/path.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/player.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/redBullet.png</File>
@@ -27,11 +28,36 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Orange_Cell.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/spaceIcon.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/SpaceStore.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/apple.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/backPack.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/baguette.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/banana.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/bluePill.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/bronze.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/gemstone.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/meat.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/redPill.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/stone.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/toolbox.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/topaz.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/tiny_ship8.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/violetPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

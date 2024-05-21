@@ -3,7 +3,7 @@ namespace SpaceSurvival;
 
 public class PathToPlayer
 {
-    private readonly HeroForMapGenerator _player;
+    // private readonly Vector2 _playerCoords;
     private readonly IMap _map;
     private readonly Texture2D _sprite;
     private readonly PathFinder _pathFinder;
@@ -11,9 +11,9 @@ public class PathToPlayer
 
     private readonly int _scale;
 
-    public PathToPlayer(HeroForMapGenerator player, IMap map, Texture2D sprite, int scale)
+    public PathToPlayer(Vector2 playerCoords, IMap map, Texture2D sprite, int scale)
     {
-        _player = player;
+        // _playerCoords = playerCoords;
         _map = map;
         _sprite = sprite;
         _pathFinder = new PathFinder(map);
@@ -23,10 +23,10 @@ public class PathToPlayer
     public Cell StepForward => (Cell)_cells.TryStepForward();
     public bool IsNearThePlayer => _cells.Length == 2;
 
-    public void CreateFrom(int x, int y)
+    public void CreateFromTO(int fromX, int fromY, int toX, int toY)
     {
-        _cells = _pathFinder.TryFindShortestPath(_map.GetCell(x, y),
-            _map.GetCell((int)_player.Coords.X, (int)_player.Coords.Y));
+        _cells = _pathFinder.TryFindShortestPath(_map.GetCell(fromX, fromY),
+            _map.GetCell(toX, toY));
     }
 
     public void Draw()

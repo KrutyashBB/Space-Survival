@@ -14,8 +14,8 @@ namespace SpaceSurvival
         private static int _maxOffset;
         private static Random _random;
 
-        private static int MapWidth;
-        private static int MapHeight;
+        private static int _mapWidth;
+        private static int _mapHeight;
 
         private const int PlanetScale = 1;
 
@@ -23,8 +23,8 @@ namespace SpaceSurvival
 
         public static void Init(int mapWidth, int mapHeight)
         {
-            MapWidth = mapWidth;
-            MapHeight = mapHeight;
+            _mapWidth = mapWidth;
+            _mapHeight = mapHeight;
 
             Planets = new List<PlanetSprite>();
             _textures = new List<(TypePlanet, Texture2D)>
@@ -68,14 +68,13 @@ namespace SpaceSurvival
                     posY += _random.Next(-_maxOffset, _maxOffset + 1);
 
                     posX = (int)MathHelper.Clamp(posX, _textures[textureIndex].Item2.Width * PlanetScale / 2f,
-                        MapWidth);
+                        _mapWidth);
                     posY = (int)MathHelper.Clamp(posY, _textures[textureIndex].Item2.Height * PlanetScale / 2f + 100,
-                        MapHeight);
+                        _mapHeight);
                     var position = new Vector2(posX, posY);
 
                     Planets.Add(new PlanetSprite(SceneManager.Id, _textures[textureIndex].Item1,
-                        _textures[textureIndex].Item2,
-                        position, PlanetScale));
+                        _textures[textureIndex].Item2, position, PlanetScale));
 
                     if (_textures[textureIndex].Item1 == TypePlanet.Store)
                     {

@@ -2,11 +2,11 @@
 
 public class Sprite
 {
-    public Point Size { get; private set; }
+    public Point Size { get; set; }
     public Vector2 Position;
     protected float Scale;
     protected readonly Texture2D Texture;
-    public readonly Vector2 Origin;
+    public Vector2 Origin;
     protected Color Color;
     public int Speed;
     public float Rotation = 0;
@@ -23,6 +23,6 @@ public class Sprite
 
     public virtual void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, 1f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, 0f);
     }
 }

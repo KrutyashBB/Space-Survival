@@ -41,7 +41,7 @@ public class Enemy : Unit
         CurrentHealth -= damage;
     }
 
-    public void Update()
+    public void Update(Vector2 playerCoords)
     {
         if (!_map.IsInFov((int)Coords.X, (int)Coords.Y))
             return;
@@ -52,7 +52,7 @@ public class Enemy : Unit
 
         if (_movementTimer > MovementDelay)
         {
-            _path.CreateFrom((int)Coords.X, (int)Coords.Y);
+            _path.CreateFromTO((int)Coords.X, (int)Coords.Y, (int)playerCoords.X, (int)playerCoords.Y);
 
             if (!_path.IsNearThePlayer)
             {

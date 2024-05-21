@@ -63,7 +63,7 @@ public static class DragDropManager
     {
         foreach (var item in _targets)
         {
-            if (item.Rect.Contains(InputManager.MousePosition) && _dragItem != item)
+            if (item.Rect.Contains(InputManager.MousePosition))
             {
                 if (_dragItem.Owner == CellOwner.PlayerInventory && item.Owner == CellOwner.ShipInventory)
                     MovingLootToShipInventory();

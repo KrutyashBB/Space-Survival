@@ -6,15 +6,15 @@ public class PlanetEnemyManager
 {
     public List<Enemy> Enemies { get; } = new();
 
-    private readonly HeroForMapGenerator _hero;
+    private readonly Vector2 _playerCoords;
     private readonly MapGenerate _map;
 
     private readonly int _scale;
 
-    public PlanetEnemyManager(HeroForMapGenerator hero, MapGenerate map, int scale)
+    public PlanetEnemyManager(Vector2 playerCoords, MapGenerate map, int scale)
     {
         _map = map;
-        _hero = hero;
+        _playerCoords = playerCoords;
         _scale = scale;
     }
 
@@ -24,8 +24,9 @@ public class PlanetEnemyManager
         {
             var enemyCoords = _map.GetRandomEmptyCell();
             var pathToPlayer =
-                new PathToPlayer(_hero, _map.Map, Globals.Content.Load<Texture2D>("path"), _scale);
-            pathToPlayer.CreateFrom((int)enemyCoords.X, (int)enemyCoords.Y);
+                new PathToPlayer(_playerCoords, _map.Map, Globals.Content.Load<Texture2D>("path"), _scale);
+            pathToPlayer.CreateFromTO((int)enemyCoords.X, (int)enemyCoords.Y, (int)_playerCoords.X,
+                (int)_playerCoords.Y);
             var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale,
                 pathToPlayer, _map.Map);
             Enemies.Add(enemy);
@@ -33,10 +34,10 @@ public class PlanetEnemyManager
     }
 
 
-    public void Update()
+    public void Update(Vector2 playerCoords)
     {
         foreach (var enemy in Enemies)
-            enemy.Update();
+            enemy.Update(playerCoords);
 
         Enemies.RemoveAll(enemy => enemy.CurrentHealth <= 0);
     }
@@ -46,7 +47,8 @@ public class PlanetEnemyManager
         foreach (var enemy in Enemies)
         {
             if (Globals.DebugFlag)
-                if (!_map.Map.IsInFov((int)enemy.Coords.X, (int)enemy.Coords.Y)) continue;
+                if (!_map.Map.IsInFov((int)enemy.Coords.X, (int)enemy.Coords.Y))
+                    continue;
             enemy.Draw();
         }
     }

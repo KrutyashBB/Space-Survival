@@ -13,7 +13,8 @@ public static class Globals
 
     public static RenderTarget2D GetNewRenderTarget()
     {
-        return new RenderTarget2D(GraphicsDevice, WindowSize.X, WindowSize.Y);
+        return new RenderTarget2D(GraphicsDevice, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+            GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
     }
 
     public static void Update(GameTime gameTime)

@@ -23,6 +23,7 @@ public class PlayerShipScene : Scene
     public override void Activate()
     {
         Load();
+        _bigBluePanel.FillCellsWithLoot();
     }
 
     public override void Update()
@@ -40,11 +41,15 @@ public class PlayerShipScene : Scene
     {
         Globals.SpriteBatch.Draw(Globals.Content.Load<Texture2D>("bg-space"), Vector2.Zero, null, Color.White, 0f,
             Vector2.Zero, 5f, SpriteEffects.None, 0f);
-        Globals.SpriteBatch.DrawString(_font, "STORAGE",
-            new Vector2(Globals.WindowSize.X / 2f - 150, _bigBluePanel.Position.Y - 70),
+        Globals.SpriteBatch.DrawString(_font, "SHIP STORAGE",
+            new Vector2(Globals.WindowSize.X / 2f - 230, _bigBluePanel.Position.Y - 70),
             Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
         _bigBluePanel.Draw();
         _smallBluePanel.Draw();
+        foreach (var cell in _bigBluePanel.Cells)
+            cell.Loot?.Draw();
+        foreach (var cell in _smallBluePanel.Cells)
+            cell.Loot?.Draw();
         _spacewalkBtn.Draw();
     }
 }

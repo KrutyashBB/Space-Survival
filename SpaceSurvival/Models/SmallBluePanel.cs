@@ -5,7 +5,7 @@ namespace SpaceSurvival;
 
 public class SmallBluePanel : Sprite
 {
-    private readonly List<CellInventoryPanel> _cells = new();
+    public List<CellInventoryPanel> Cells { get; } = new();
     private static readonly int CountCells = InventoryManager.CapacityPlayerInventory;
 
     private readonly Texture2D _cellTexture = Globals.Content.Load<Texture2D>("Small_Orange_Cell");
@@ -13,11 +13,11 @@ public class SmallBluePanel : Sprite
     public SmallBluePanel(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
         for (var i = 0; i < CountCells; i++)
-            _cells.Add(new CellInventoryPanel(CellOwner.PlayerInventory, _cellTexture, new Vector2(0, 0), Scale));
+            Cells.Add(new CellInventoryPanel(CellOwner.PlayerInventory, _cellTexture, new Vector2(0, 0), Scale));
 
         foreach (var loot in InventoryManager.PlayerInventory)
         {
-            var cell = _cells.FirstOrDefault(c => c.Loot == null);
+            var cell = Cells.FirstOrDefault(c => c.Loot == null);
             if (cell != null)
                 cell.Loot = loot;
         }
@@ -30,8 +30,8 @@ public class SmallBluePanel : Sprite
         var spacing = (Size.X - totalWidth) / (CountCells + 1);
         var startX = Position.X + spacing;
 
-        for (var i = 0; i < _cells.Count; i++)
-            _cells[i].Position = new Vector2(startX + (_cellTexture.Width * Scale + spacing) * i,
+        for (var i = 0; i < Cells.Count; i++)
+            Cells[i].Position = new Vector2(startX + (_cellTexture.Width * Scale + spacing) * i,
                 Position.Y + (Size.Y - _cellTexture.Height * Scale) / 2f);
     }
 
@@ -48,14 +48,14 @@ public class SmallBluePanel : Sprite
 
     public void FillCellWithLoot()
     {
-        var cell = _cells.FirstOrDefault(c => c.Loot == null);
+        var cell = Cells.FirstOrDefault(c => c.Loot == null);
         if (cell != null)
             cell.Loot = InventoryManager.PlayerInventory.LastOrDefault();
     }
 
     private void UpdateCellState()
     {
-        foreach (var cell in _cells)
+        foreach (var cell in Cells)
             cell.Update();
     }
 
@@ -69,7 +69,7 @@ public class SmallBluePanel : Sprite
 
     public void Update(Vector2 playerPos, Point playerSize, Point mapSize)
     {
-        Position = CalculatePosition(playerPos, playerSize, Size, mapSize);
+        Position = Vector2.Lerp(Position, CalculatePosition(playerPos, playerSize, Size, mapSize), 0.5f);
 
         UpdateCellsPosition();
         UpdateCellState();
@@ -78,7 +78,9 @@ public class SmallBluePanel : Sprite
     public override void Draw()
     {
         base.Draw();
-        foreach (var cell in _cells)
+        foreach (var cell in Cells)
             cell.Draw();
+        foreach (var cell in Cells)
+            cell.Loot?.Draw();
     }
 }

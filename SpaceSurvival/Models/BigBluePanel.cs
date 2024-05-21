@@ -6,7 +6,7 @@ namespace SpaceSurvival;
 
 public class BigBluePanel : Sprite
 {
-    private readonly List<CellInventoryPanel> _cells = new();
+    public List<CellInventoryPanel> Cells { get; } = new();
     private static readonly int CountCells = InventoryManager.CapacityShipInventory;
 
     private readonly Texture2D _cellTexture = Globals.Content.Load<Texture2D>("Small_Orange_Cell");
@@ -17,7 +17,7 @@ public class BigBluePanel : Sprite
     {
         Position = new Vector2(Globals.WindowSize.X / 2f - Size.X / 2f, 0);
         for (var i = 0; i < CountCells; i++)
-            _cells.Add(new CellInventoryPanel(CellOwner.ShipInventory, _cellTexture, new Vector2(0, 0), CellScale));
+            Cells.Add(new CellInventoryPanel(CellOwner.ShipInventory, _cellTexture, new Vector2(0, 0), CellScale));
     }
 
     private void UpdateCellsPosition()
@@ -28,7 +28,7 @@ public class BigBluePanel : Sprite
         var x = 0;
         var y = 0;
 
-        foreach (var cell in _cells)
+        foreach (var cell in Cells)
         {
             cell.Position = new Vector2(startX + (_cellTexture.Width * CellScale + spacingX) * x,
                 Position.Y + 20 + (_cellTexture.Height * CellScale + 20) * y);
@@ -41,16 +41,16 @@ public class BigBluePanel : Sprite
         }
     }
 
-    private void FillCellsWithLoot()
+    public void FillCellsWithLoot()
     {
         for (var i = 0; i < CountCells; i++)
             if (InventoryManager.ShipInventory.Count > i)
-                _cells[i].Loot = InventoryManager.ShipInventory[i];
+                Cells[i].Loot = InventoryManager.ShipInventory[i];
     }
 
     private void UpdateCellState()
     {
-        foreach (var cell in _cells)
+        foreach (var cell in Cells)
             cell.Update();
     }
 
@@ -59,14 +59,15 @@ public class BigBluePanel : Sprite
         Position = new Vector2(Globals.WindowSize.X / 2f - Size.X / 2f, offsetFromTopScreen);
 
         UpdateCellsPosition();
-        FillCellsWithLoot();
         UpdateCellState();
     }
 
     public override void Draw()
     {
         base.Draw();
-        foreach (var cell in _cells)
+        foreach (var cell in Cells)
             cell.Draw();
+        foreach (var cell in Cells)
+            cell.Loot?.Draw();
     }
 }

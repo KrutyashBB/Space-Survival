@@ -6,8 +6,8 @@ namespace SpaceSurvival;
 
 public class HeroForMapGenerator : Unit
 {
-    private readonly MapGenerate _map;
-    public Vector2 Coords { get; private set; }
+    public MapGenerate Map { get; set; }
+    public Vector2 Coords { get; set; }
     private Vector2 _direction;
 
     private float _movementTimer;
@@ -17,13 +17,13 @@ public class HeroForMapGenerator : Unit
 
     public HeroForMapGenerator(Texture2D tex, Vector2 coords, float scale, MapGenerate map) : base(tex, coords, scale)
     {
-        _map = map;
+        Map = map;
 
         Coords = coords;
         Position = new Vector2(coords.X * tex.Width * scale, coords.Y * tex.Width * scale);
         UpdatePlayerFieldOfView();
 
-        CurrentHealth = MaxHealth = 100;
+        CurrentHealth = MaxHealth = 20;
         Damage = 3;
         Name = "Hero";
 
@@ -46,7 +46,7 @@ public class HeroForMapGenerator : Unit
 
     private void UpdatePlayerFieldOfView()
     {
-        _map.Map.ComputeFov((int)Coords.X, (int)Coords.Y, 5, true);
+        Map.Map.ComputeFov((int)Coords.X, (int)Coords.Y, 5, true);
     }
 
     public void Update(List<Enemy> enemies)
@@ -74,7 +74,7 @@ public class HeroForMapGenerator : Unit
         var newPos = new Vector2(newCoords.X * Texture.Width * Scale, newCoords.Y * Texture.Height * Scale);
         var enemy = enemies.FirstOrDefault(x => x.Coords == newCoords);
 
-        if (_map.Map.IsWalkable((int)newCoords.X, (int)newCoords.Y) && enemy == null)
+        if (Map.Map.IsWalkable((int)newCoords.X, (int)newCoords.Y) && enemy == null)
         {
             Coords = newCoords;
             Position = Vector2.Lerp(Position, newPos, 0.1f);

@@ -26,7 +26,7 @@ public class MapGenerate
     {
         SetTileSet(typePlanet);
 
-        Map = Map.Create(new CaveMapCreationStrategy<Map>(MapWidth, MapHeight, 45, 2, 20));
+        Map = Map.Create(new CaveMapCreationStrategy<Map>(MapWidth, MapHeight, 45, 2, 2));
         _scale = scale;
         _tileWidth = _isWalkableTex.Width * _scale;
         _tileHeight = _isWalkableTex.Height * _scale;
@@ -177,7 +177,7 @@ public class MapGenerate
 
                 Globals.SpriteBatch.Draw(_tileSet, new Vector2(tileX, tileY),
                     MapCells[y, x] ? _isWalkableTex : _isNotWalkableTex, Color.White, 0f,
-                    Vector2.Zero, _scale, SpriteEffects.None, 1f);
+                    Vector2.Zero, _scale, SpriteEffects.None, 0f);
             }
         }
     }

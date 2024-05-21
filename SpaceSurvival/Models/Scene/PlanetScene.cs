@@ -6,28 +6,35 @@ namespace SpaceSurvival;
 public class PlanetScene : Scene
 {
     private readonly MapGenerate _map;
-    private readonly HeroForMapGenerator _player;
+    private static HeroForMapGenerator _player;
+    private Vector2 _playerCoords;
+    private Vector2 _playerPosition;
     private const int Scale = 5;
 
-    private readonly PlanetEnemyManager _planetEnemyManager;
+    private PlanetEnemyManager _planetEnemyManager;
     private readonly LootManager _lootManager;
-    
+
     private SmallBluePanel _smallBluePanel;
+
+    private const float Duration = 1f;
+    private float _durationLeft;
 
     private Matrix _translation;
 
     public PlanetScene(TypePlanet typePlanet)
     {
         _map = new MapGenerate(Scale, typePlanet);
+        _playerCoords = _map.GetRandomEmptyCell();
         _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"),
-            _map.GetRandomEmptyCell(), Scale, _map);
+            _playerCoords, Scale, _map);
+        _playerPosition = _player.Position;
 
         _lootManager = new LootManager(_map, Scale);
-        _lootManager.AddLoot(LootType.Type1, 2);
-        _lootManager.AddLoot(LootType.Type2, 4);
-        _lootManager.AddLoot(LootType.Type3, 7);
+        _lootManager.AddLoot(LootType.Gold, 2);
+        _lootManager.AddLoot(LootType.Ruby, 4);
+        _lootManager.AddLoot(LootType.Bronze, 7);
 
-        _planetEnemyManager = new PlanetEnemyManager(_player, _map, Scale);
+        _planetEnemyManager = new PlanetEnemyManager(_player.Coords, _map, Scale);
         _planetEnemyManager.CreateEnemies(10);
 
         _smallBluePanel =
@@ -41,6 +48,11 @@ public class PlanetScene : Scene
 
     public override void Activate()
     {
+        _durationLeft = 0;
+        _player.Coords = _playerCoords;
+        _player.Position = _playerPosition;
+        _player.Map = _map;
+
         _smallBluePanel =
             new SmallBluePanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
     }
@@ -68,20 +80,35 @@ public class PlanetScene : Scene
 
     public override void Update()
     {
+        _durationLeft += Globals.TotalSeconds;
+        if (_durationLeft > Duration)
+        {
+            _planetEnemyManager.Update(_player.Coords);
+            _smallBluePanel.Update(_player.Position, _player.Size, _map.MapSize);
+            CheckCollisionWithLoot();
+        }
+
         _player.Update(_planetEnemyManager.Enemies);
-        _planetEnemyManager.Update();
-        _smallBluePanel.Update(_player.Position, _player.Size, _map.MapSize);
+        _playerCoords = _player.Coords;
         CalculateTranslation();
-        CheckCollisionWithLoot();
     }
 
     protected override void Draw()
     {
-        _map.Draw();
-        _lootManager.Draw();
-        _planetEnemyManager.Draw();
-        _player.Draw();
-        _smallBluePanel.Draw();
+        if (_durationLeft < Duration)
+        {
+            Globals.SpriteBatch.Draw(Globals.Content.Load<Texture2D>("landingBack"),
+                new Rectangle((int)-_translation.Translation.X, (int)-_translation.Translation.Y, Globals.WindowSize.X,
+                    Globals.WindowSize.Y), Color.White);
+        }
+        else
+        {
+            _map.Draw();
+            _lootManager.Draw();
+            _planetEnemyManager.Draw();
+            _player.Draw();
+            _smallBluePanel.Draw();
+        }
     }
 
     public override RenderTarget2D GetFrame()

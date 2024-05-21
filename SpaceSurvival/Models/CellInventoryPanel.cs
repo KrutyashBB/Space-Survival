@@ -27,10 +27,4 @@ public class CellInventoryPanel : Sprite
             Loot.Position = new Vector2(Position.X + (Size.X - Loot.Size.X) / 2f,
                 Position.Y + (Size.Y - Loot.Size.Y) / 2f);
     }
-
-    public override void Draw()
-    {
-        base.Draw();
-        Loot?.Draw();
-    }
 }

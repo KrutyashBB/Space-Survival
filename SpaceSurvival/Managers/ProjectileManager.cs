@@ -6,12 +6,13 @@ public static class ProjectileManager
 {
     private static Texture2D _enemyBulletTexture;
     private static Texture2D _playerBulletTexture;
-    public static List<Projectile> Projectiles { get; } = new();
+    public static List<Projectile> Projectiles { get; private set; }
 
     public static void Init()
     {
         _enemyBulletTexture = Globals.Content.Load<Texture2D>("redBullet");
         _playerBulletTexture = Globals.Content.Load<Texture2D>("blueBullet");
+        Projectiles = new List<Projectile>();
     }
 
     public static void AddEnemyProjectile(ProjectileData data)
