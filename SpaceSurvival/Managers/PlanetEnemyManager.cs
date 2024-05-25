@@ -18,7 +18,7 @@ public class PlanetEnemyManager
         _scale = scale;
     }
 
-    public void CreateEnemies(int count)
+    public void CreateEnemies(int count, Texture2D texture, int framesX)
     {
         for (var i = 0; i < count; i++)
         {
@@ -27,8 +27,7 @@ public class PlanetEnemyManager
                 new PathToPlayer(_playerCoords, _map.Map, Globals.Content.Load<Texture2D>("path"), _scale);
             pathToPlayer.CreateFromTO((int)enemyCoords.X, (int)enemyCoords.Y, (int)_playerCoords.X,
                 (int)_playerCoords.Y);
-            var enemy = new Enemy(Globals.Content.Load<Texture2D>("enemy"), enemyCoords, _scale,
-                pathToPlayer, _map.Map);
+            var enemy = new Enemy(texture, enemyCoords, _scale, framesX, pathToPlayer, _map.Map);
             Enemies.Add(enemy);
         }
     }

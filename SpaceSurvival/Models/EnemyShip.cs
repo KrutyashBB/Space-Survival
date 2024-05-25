@@ -5,19 +5,24 @@ namespace SpaceSurvival;
 public class EnemyShip : Unit
 {
     public Rectangle Rect { get; private set; }
-    private ProgressBar _healthBar;
-        
+    private readonly ProgressBar _healthBar;
+
     public MovementEnemyShips MoveEnemy { get; set; }
     private readonly FollowMovementEnemyShip _followMovement;
 
     private double _timeSinceFire;
     private const double FireInterval = 0.5;
 
+    private readonly SoundEffectInstance _shotSound;
+
 
     public EnemyShip(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
         _followMovement = new FollowMovementEnemyShip();
         Speed = 150;
+
+        _shotSound = Globals.Content.Load<SoundEffect>("Audio/shotSound").CreateInstance();
+        _shotSound.Volume = 0.2f;
 
         CurrentHealth = MaxHealth = 30;
         Damage = 10;
@@ -52,7 +57,7 @@ public class EnemyShip : Unit
     {
         var minSize = Math.Min(Size.X, Size.Y);
         Rect = new Rectangle((int)Position.X - minSize / 2, (int)Position.Y - minSize / 2, minSize, minSize);
-        
+
         _healthBar.Update(CurrentHealth, new Vector2(Position.X - Size.X / 2f, Position.Y - Size.Y * 0.9f));
 
         ChangeMovementInRangePLayer(ship);
@@ -62,6 +67,7 @@ public class EnemyShip : Unit
             _timeSinceFire += Globals.TotalSeconds;
             if (_timeSinceFire >= FireInterval)
             {
+                _shotSound.Play();
                 Fire();
                 _timeSinceFire = 0;
             }

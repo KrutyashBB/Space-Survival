@@ -14,6 +14,7 @@ public static class DragDropManager
     {
         _draggables = new List<CellInventoryPanel>();
         _targets = new List<CellInventoryPanel>();
+        _dragItem = null;
     }
 
     public static void AddDraggable(CellInventoryPanel draggable)
@@ -63,11 +64,11 @@ public static class DragDropManager
     {
         foreach (var item in _targets)
         {
-            if (item.Rect.Contains(InputManager.MousePosition))
+            if (item.Rect.Contains(InputManager.MousePosition) && item.Loot == null)
             {
-                if (_dragItem.Owner == CellOwner.PlayerInventory && item.Owner == CellOwner.ShipInventory)
+                if (_dragItem.Owner == CellOwner.PlayerInventory && item.Owner == CellOwner.ShipStorage)
                     MovingLootToShipInventory();
-                else if (_dragItem.Owner == CellOwner.ShipInventory && item.Owner == CellOwner.PlayerInventory)
+                else if (_dragItem.Owner == CellOwner.ShipStorage && item.Owner == CellOwner.PlayerInventory)
                     MovingLootToPlayerInventory();
 
                 item.Loot = _dragItem.Loot;

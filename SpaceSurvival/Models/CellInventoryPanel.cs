@@ -3,12 +3,14 @@
 public enum CellOwner
 {
     PlayerInventory,
-    ShipInventory
+    ShipStorage,
+    Purchase,
+    Sale
 }
 
 public class CellInventoryPanel : Sprite
 {
-    public CellOwner Owner;
+    public readonly CellOwner Owner;
     public Rectangle Rect;
     public Loot Loot;
 

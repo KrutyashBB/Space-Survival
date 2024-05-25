@@ -11,7 +11,7 @@ public class FollowMovementEnemyShip : MovementEnemyShips
         if (Target is null) return;
 
         var dir = Target.Position - enemyShip.Position;
-        
+
         var rotation = (float)Math.Atan2(dir.Y, dir.X);
         rotation = MathHelper.ToDegrees(rotation);
         rotation += 90;

@@ -7,7 +7,7 @@ public class EnemyShipManager
 {
     public List<EnemyShip> EnemyShips { get; } = new();
     private int _countEnemies;
-    private Texture2D _texture = Globals.Content.Load<Texture2D>("tiny_ship8");
+    private Texture2D _texture = Globals.Content.Load<Texture2D>("enemyShip");
     private static Random _random;
     private static int _padding;
 

@@ -23,6 +23,6 @@ public class Sprite
 
     public virtual void Draw()
     {
-        Globals.SpriteBatch.Draw(Texture, Position, null, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+        Globals.SpriteBatch.Draw(Texture, Position, null, Color, Rotation, Vector2.Zero, Scale, SpriteEffects.None, 1f);
     }
 }

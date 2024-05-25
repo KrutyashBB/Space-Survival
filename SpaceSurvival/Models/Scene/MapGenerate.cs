@@ -105,7 +105,6 @@ public class MapGenerate
         var walkableTexturesSource = new Rectangle[]
         {
             new(64, 16, 16, 16),
-            new(48, 48, 16, 16),
         };
 
         var notWalkableTexturesSource = new Rectangle[]

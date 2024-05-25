@@ -16,7 +16,7 @@ public class StartOverBtn : Sprite
         if (Rect.Contains(InputManager.MousePosition))
         {
             if (InputManager.ClickedMouseLeftButton())
-                SceneManager.Init();
+                SceneManager.Reset();
             Color = Color.Gray;
         }
         else

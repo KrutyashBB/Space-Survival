@@ -4,6 +4,18 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/../../../../Downloads/fireTrail.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/backSongForGreenPlanet.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/backSongForIcePlanet.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/backSongForRedPlanet.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/backSongForVioletPlanet.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/backSongSpaceScene.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/engineSound.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/landingSound.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/mainSong.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/shotSound.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/soundInShip.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/swordHitSound.mp3</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/back.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/BasicGreen.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bg-space.png</File>
@@ -12,6 +24,10 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/bullet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/DarkCastle.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/enemy.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Enemy1.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Enemy2.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Enemy3.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/enemyShip.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/FireSet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/floor.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/font.spritefont</File>
@@ -22,11 +38,15 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/landingBack.jpg</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/path.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/player.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/PlayerSpriteSet.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Rect_Green_Btn.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/redBullet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/redPlanet.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Blue_Panel.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_Orange_Cell.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Small_White_Cell.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/spaceIcon.png</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/spaceShipBack.jpg</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/SpaceStore.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/apple.png</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/ThingsToBuyAndCollect/backPack.png</File>
@@ -45,6 +65,26 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>fireTrail.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

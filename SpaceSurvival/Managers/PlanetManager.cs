@@ -55,7 +55,7 @@ namespace SpaceSurvival
         {
             for (var row = 0; row <= _rows; row++)
             {
-                for (var column = 0; column <= _columns; column += _random.Next(2, 5))
+                for (var column = 1; column <= _columns; column += _random.Next(2, 5))
                 {
                     var textureIndex = _random.Next(0, _textures.Count);
                     if (_textures[textureIndex].Item1 == TypePlanet.Store && _isStorePlanetCreated)

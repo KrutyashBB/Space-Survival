@@ -6,18 +6,22 @@ namespace SpaceSurvival;
 public class PlanetScene : Scene
 {
     private readonly MapGenerate _map;
-    private static HeroForMapGenerator _player;
+    private static MainHero _player;
     private Vector2 _playerCoords;
-    private Vector2 _playerPosition;
-    private const int Scale = 5;
+    private readonly Vector2 _playerPosition;
+    private const int Scale = 6;
 
-    private PlanetEnemyManager _planetEnemyManager;
+    private readonly PlanetEnemyManager _planetEnemyManager;
     private readonly LootManager _lootManager;
 
-    private SmallBluePanel _smallBluePanel;
+    private PlayerInventoryPanel _playerInventoryPanel;
+    private SpacewalkBtn _spacewalkBtn;
 
-    private const float Duration = 1f;
-    private float _durationLeft;
+    private const float DurationLanding = 1f;
+    private float _durationLandingLeft;
+
+    private SoundEffectInstance _backSong;
+    private readonly SoundEffectInstance _landingSound;
 
     private Matrix _translation;
 
@@ -25,9 +29,21 @@ public class PlanetScene : Scene
     {
         _map = new MapGenerate(Scale, typePlanet);
         _playerCoords = _map.GetRandomEmptyCell();
-        _player = new HeroForMapGenerator(Globals.Content.Load<Texture2D>("player"),
+        _player = new MainHero(Globals.Content.Load<Texture2D>("PlayerSpriteSet"),
             _playerCoords, Scale, _map);
         _playerPosition = _player.Position;
+
+        if (typePlanet == TypePlanet.Green)
+            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForGreenPlanet").CreateInstance();
+        if (typePlanet == TypePlanet.Red)
+            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForRedPlanet").CreateInstance();
+        if (typePlanet == TypePlanet.Violet)
+            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForVioletPlanet").CreateInstance();
+        if (typePlanet == TypePlanet.Ice)
+            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForIcePlanet").CreateInstance();
+        
+        _landingSound = Globals.Content.Load<SoundEffect>("Audio/landingSound").CreateInstance();
+        _landingSound.Volume = 0.5f;
 
         _lootManager = new LootManager(_map, Scale);
         _lootManager.AddLoot(LootType.Gold, 2);
@@ -35,10 +51,23 @@ public class PlanetScene : Scene
         _lootManager.AddLoot(LootType.Bronze, 7);
 
         _planetEnemyManager = new PlanetEnemyManager(_player.Coords, _map, Scale);
-        _planetEnemyManager.CreateEnemies(10);
+        if (typePlanet == TypePlanet.Red || typePlanet == TypePlanet.Violet)
+            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy2"), 7);
+        else if (typePlanet == TypePlanet.Green)
+            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy1"), 8);
+        else if (typePlanet == TypePlanet.Ice)
+            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy3"), 7);
 
-        _smallBluePanel =
-            new SmallBluePanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
+        _playerInventoryPanel =
+            new PlayerInventoryPanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
+        _spacewalkBtn = new SpacewalkBtn(Globals.Content.Load<Texture2D>("Small_Orange_Cell"), Vector2.Zero, 0.5f);
+        _spacewalkBtn.OnClick += ClickSpacewalkBtn;
+    }
+
+    private void ClickSpacewalkBtn(object sender, EventArgs e)
+    {
+        _backSong.Pause();
+        SceneManager.SwitchScene((int)TypeScene.SpaceScene);
     }
 
 
@@ -48,13 +77,16 @@ public class PlanetScene : Scene
 
     public override void Activate()
     {
-        _durationLeft = 0;
+        _durationLandingLeft = 0;
         _player.Coords = _playerCoords;
         _player.Position = _playerPosition;
         _player.Map = _map;
 
-        _smallBluePanel =
-            new SmallBluePanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
+        _landingSound.Play();
+        _backSong.Resume();
+
+        _playerInventoryPanel =
+            new PlayerInventoryPanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
     }
 
 
@@ -74,28 +106,37 @@ public class PlanetScene : Scene
         {
             InventoryManager.AddToPlayerInventory(loot);
             _lootManager.Loots.Remove(loot);
-            _smallBluePanel.FillCellWithLoot();
+            _playerInventoryPanel.FillCellWithLoot();
         }
     }
 
     public override void Update()
     {
-        _durationLeft += Globals.TotalSeconds;
-        if (_durationLeft > Duration)
+        if (_player.CurrentHealth <= 0)
+        {
+            _backSong.Stop();
+            _player.Reset();
+            SceneManager.SwitchScene((int)TypeScene.PlayerDeathScene);
+        }
+        
+        _durationLandingLeft += Globals.TotalSeconds;
+        if (_durationLandingLeft > DurationLanding)
         {
             _planetEnemyManager.Update(_player.Coords);
-            _smallBluePanel.Update(_player.Position, _player.Size, _map.MapSize);
+            _playerInventoryPanel.Update(_player.Position, _player.Size, _map.MapSize);
             CheckCollisionWithLoot();
+            _player.Update(_planetEnemyManager.Enemies);
+            _spacewalkBtn.Update();
         }
 
-        _player.Update(_planetEnemyManager.Enemies);
+        _spacewalkBtn.UpdatePosition(new Vector2(-_translation.Translation.X, -_translation.Translation.Y));
         _playerCoords = _player.Coords;
         CalculateTranslation();
     }
 
     protected override void Draw()
     {
-        if (_durationLeft < Duration)
+        if (_durationLandingLeft < DurationLanding)
         {
             Globals.SpriteBatch.Draw(Globals.Content.Load<Texture2D>("landingBack"),
                 new Rectangle((int)-_translation.Translation.X, (int)-_translation.Translation.Y, Globals.WindowSize.X,
@@ -107,7 +148,9 @@ public class PlanetScene : Scene
             _lootManager.Draw();
             _planetEnemyManager.Draw();
             _player.Draw();
-            _smallBluePanel.Draw();
+            _playerInventoryPanel.Draw();
+            _playerInventoryPanel.DrawLoot();
+            _spacewalkBtn.Draw();
         }
     }
 

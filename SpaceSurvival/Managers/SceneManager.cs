@@ -4,6 +4,9 @@ namespace SpaceSurvival;
 
 public enum TypeScene
 {
+    StartGameScene,
+    ControlScene,
+    StoreScene,
     PlayerDeathScene,
     PlayerShipScene,
     SpaceScene
@@ -19,6 +22,26 @@ public static class SceneManager
     {
         _scenes = new Dictionary<int, Scene>
         {
+            { (int)TypeScene.StartGameScene, new StartGameScene() },
+            { (int)TypeScene.ControlScene, new ControlScene() },
+            { (int)TypeScene.StoreScene, new StoreScene() },
+            { (int)TypeScene.PlayerDeathScene, new PlayerDeathScene() },
+            { (int)TypeScene.PlayerShipScene, new PlayerShipScene() }
+        };
+        Id = _scenes.Keys.Count;
+
+        _scenes.Add(Id++, new SpaceScene());
+        ActiveScene = (int)TypeScene.StartGameScene;
+        _scenes[ActiveScene].Activate();
+    }
+
+    public static void Reset()
+    {
+        _scenes = new Dictionary<int, Scene>
+        {
+            { (int)TypeScene.StartGameScene, new StartGameScene() },
+            { (int)TypeScene.ControlScene, new ControlScene() },
+            { (int)TypeScene.StoreScene, new StoreScene() },
             { (int)TypeScene.PlayerDeathScene, new PlayerDeathScene() },
             { (int)TypeScene.PlayerShipScene, new PlayerShipScene() }
         };

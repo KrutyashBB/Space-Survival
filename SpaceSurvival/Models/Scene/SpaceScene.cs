@@ -12,12 +12,17 @@ public class SpaceScene : Scene
     private Sprite _background;
     private InventoryBtn _inventoryBtn;
 
+    private SoundEffectInstance _backSong;
+
     private Matrix _translation;
 
     protected override void Load()
     {
         _background = new Sprite(Globals.Content.Load<Texture2D>("bg-space"), new Vector2(0, 0), 4f);
         _inventoryBtn = new InventoryBtn(Globals.Content.Load<Texture2D>("Small_Orange_Cell"), Vector2.Zero, 0.5f);
+
+        _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongSpaceScene").CreateInstance();
+        _backSong.Volume = 0.2f;
 
         _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
@@ -38,6 +43,7 @@ public class SpaceScene : Scene
 
     public override void Activate()
     {
+        _backSong.Resume();
     }
 
     private void CalculateTranslation(Sprite target, Sprite screen)
@@ -57,7 +63,11 @@ public class SpaceScene : Scene
             {
                 planet.IsCollisionWithPlayerShip = true;
                 if (InputManager.KeyboardKeyPressed(Keys.W))
+                {
+                    _backSong.Pause();
+                    _ship.EngineSound.Pause();
                     LoadScene(planet);
+                }
             }
             else
                 planet.IsCollisionWithPlayerShip = false;
@@ -107,8 +117,19 @@ public class SpaceScene : Scene
 
     public override void Update()
     {
+        if (_ship.CurrentHealth <= 0)
+        {
+            _ship.EngineSound.Pause();
+            _ship.RestartGame();
+            _backSong.Stop();
+            SceneManager.SwitchScene((int)TypeScene.PlayerDeathScene);
+        }
+
         if (InputManager.KeyboardKeyPressed(Keys.Tab))
+        {
+            _backSong.Pause();
             SceneManager.SwitchScene((int)TypeScene.PlayerShipScene);
+        }
 
         _ship.Update();
         _inventoryBtn.Update(_ship.Position, _background.Size);
