@@ -13,6 +13,7 @@ public class SpaceScene : Scene
     private InventoryBtn _inventoryBtn;
 
     private SoundEffectInstance _backSong;
+    private SoundEffectInstance _clickBtnSound;
 
     private Matrix _translation;
 
@@ -23,6 +24,7 @@ public class SpaceScene : Scene
 
         _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongSpaceScene").CreateInstance();
         _backSong.Volume = 0.2f;
+        _clickBtnSound = Globals.Content.Load<SoundEffect>("Audio/clickBtnSound").CreateInstance();
 
         _ship = new Ship(Globals.Content.Load<Texture2D>("tiny_ship8"),
             new Vector2(_background.Size.X / 2f, _background.Size.Y / 2f), 1f);
@@ -127,6 +129,7 @@ public class SpaceScene : Scene
 
         if (InputManager.KeyboardKeyPressed(Keys.Tab))
         {
+            _clickBtnSound.Play();
             _backSong.Pause();
             SceneManager.SwitchScene((int)TypeScene.PlayerShipScene);
         }

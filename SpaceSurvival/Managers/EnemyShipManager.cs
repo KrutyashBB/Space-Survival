@@ -6,8 +6,8 @@ namespace SpaceSurvival;
 public class EnemyShipManager
 {
     public List<EnemyShip> EnemyShips { get; } = new();
-    private int _countEnemies;
-    private Texture2D _texture = Globals.Content.Load<Texture2D>("enemyShip");
+    private readonly Texture2D _texture = Globals.Content.Load<Texture2D>("enemyShip");
+    private readonly int _countEnemies;
     private static Random _random;
     private static int _padding;
 

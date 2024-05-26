@@ -2,7 +2,7 @@
 
 public class Sprite
 {
-    public Point Size { get; set; }
+    public Point Size { get; protected init; }
     public Vector2 Position;
     protected float Scale;
     protected readonly Texture2D Texture;

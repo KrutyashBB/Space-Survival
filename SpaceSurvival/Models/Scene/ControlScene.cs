@@ -4,9 +4,10 @@ namespace SpaceSurvival;
 
 public class ControlScene : Scene
 {
-    private StartGameSceneBtn _returnBtn;
-
     private SpriteFont _font;
+    private StartGameSceneBtn _returnBtn;
+    private SoundEffectInstance _clickBtnSound;
+
 
     protected override void Load()
     {
@@ -16,6 +17,7 @@ public class ControlScene : Scene
         _returnBtn.OnClick += Return;
 
         _font = Globals.Content.Load<SpriteFont>("font");
+        _clickBtnSound = Globals.Content.Load<SoundEffect>("Audio/clickBtnSound").CreateInstance();
     }
 
     public override void Activate()
@@ -24,6 +26,7 @@ public class ControlScene : Scene
 
     private void Return(object sender, EventArgs e)
     {
+        _clickBtnSound.Play();
         SceneManager.SwitchScene((int)TypeScene.StartGameScene);
     }
 

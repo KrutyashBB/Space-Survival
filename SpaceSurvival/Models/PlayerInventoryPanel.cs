@@ -5,9 +5,8 @@ namespace SpaceSurvival;
 
 public class PlayerInventoryPanel : Sprite
 {
-    public List<CellInventoryPanel> Cells { get; } = new();
+    private List<CellInventoryPanel> Cells { get; } = new();
     private static readonly int CountCells = InventoryManager.CapacityPlayerInventory;
-
     private readonly Texture2D _cellTexture = Globals.Content.Load<Texture2D>("Small_Orange_Cell");
 
     public PlayerInventoryPanel(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)

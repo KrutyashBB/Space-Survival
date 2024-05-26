@@ -4,12 +4,12 @@ namespace SpaceSurvival;
 
 public class Game1 : Game
 {
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
 
-    private int minWidth = 1200;
-    private int minHeight = 900;
+    private const int MinWidth = 1200;
+    private const int MinHeight = 900;
 
     public Game1()
     {
@@ -22,8 +22,8 @@ public class Game1 : Game
     {
         Globals.WindowSize = new Point(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
             GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
-        _graphics.PreferredBackBufferWidth = minWidth;
-        _graphics.PreferredBackBufferHeight = minHeight;
+        _graphics.PreferredBackBufferWidth = MinWidth;
+        _graphics.PreferredBackBufferHeight = MinHeight;
         Window.AllowUserResizing = true;
         _graphics.ApplyChanges();
 
@@ -43,10 +43,10 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (_graphics.PreferredBackBufferWidth < minWidth)
-            _graphics.PreferredBackBufferWidth = minWidth;
-        if (_graphics.PreferredBackBufferHeight < minHeight)
-            _graphics.PreferredBackBufferHeight = minHeight;
+        if (_graphics.PreferredBackBufferWidth < MinWidth)
+            _graphics.PreferredBackBufferWidth = MinWidth;
+        if (_graphics.PreferredBackBufferHeight < MinHeight)
+            _graphics.PreferredBackBufferHeight = MinHeight;
         _graphics.ApplyChanges();
 
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||

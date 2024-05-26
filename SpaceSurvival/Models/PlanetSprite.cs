@@ -5,14 +5,13 @@ namespace SpaceSurvival;
 public class PlanetSprite : Sprite
 {
     public int Id { get; private set; }
-    public TypePlanet TypePlanet { get; private set; }
+    private TypePlanet TypePlanet { get; }
     public Rectangle Rect { get; private set; }
-
-    private float _rotation;
-    private const float RotationSpeed = 0.3f;
-    private readonly float _randomSpeed;
     
-
+    private float _rotation;
+    private readonly float _randomSpeed;
+    private const float RotationSpeed = 0.3f;
+    
     public bool IsCollisionWithPlayerShip = false;
     private readonly SpriteFont _font;
 
@@ -39,9 +38,11 @@ public class PlanetSprite : Sprite
     {
         Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None,
             1f);
+        
         if (TypePlanet == TypePlanet.Store)
             Globals.SpriteBatch.DrawString(_font, "STORE", new Vector2(Position.X - Size.X * 0.2f, Position.Y - 30),
                 Color.Blue);
+        
         if (IsCollisionWithPlayerShip)
             Globals.SpriteBatch.DrawString(_font, "Click W",
                 new Vector2(Position.X - 50, Position.Y - Size.Y * 0.7f), Color.White);

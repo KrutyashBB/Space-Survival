@@ -4,12 +4,11 @@ namespace SpaceSurvival;
 
 public static class Globals
 {
-    public static float TotalSeconds { get; set; }
+    public static float TotalSeconds { get; private set; }
     public static ContentManager Content { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
     public static GraphicsDevice GraphicsDevice { get; set; }
     public static Point WindowSize { get; set; }
-    public static bool DebugFlag { get; set; } = false;
 
     public static RenderTarget2D GetNewRenderTarget()
     {

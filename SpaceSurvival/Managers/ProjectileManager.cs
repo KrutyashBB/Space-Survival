@@ -10,9 +10,9 @@ public static class ProjectileManager
 
     public static void Init()
     {
+        Projectiles = new List<Projectile>();
         _enemyBulletTexture = Globals.Content.Load<Texture2D>("redBullet");
         _playerBulletTexture = Globals.Content.Load<Texture2D>("blueBullet");
-        Projectiles = new List<Projectile>();
     }
 
     public static void AddEnemyProjectile(ProjectileData data)

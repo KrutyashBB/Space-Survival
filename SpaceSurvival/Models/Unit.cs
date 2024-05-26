@@ -3,11 +3,10 @@
 public class Unit : Sprite
 {
     public int CurrentHealth { get; set; }
-    public int MaxHealth { get; set; }
-    public int Damage { get; set; }
-    public string Name { get; set; }
+    protected int MaxHealth { get; init; }
+    public int Damage { get; protected init; }
 
-    public Unit(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
+    protected Unit(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
     }
 }

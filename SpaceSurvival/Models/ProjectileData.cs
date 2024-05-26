@@ -7,10 +7,10 @@ public enum ProjectileType
 }
 public class ProjectileData
 {
-    public ProjectileType Type { get; set; }
-    public Vector2 Position { get; set; }
-    public float Rotation { get; set; }
-    public float LifeSpan { get; set; }
-    public int Damage { get; set; }
-    public int Speed { get; set; }
+    public ProjectileType Type { get; init; }
+    public Vector2 Position { get; init; }
+    public float Rotation { get; init; }
+    public float LifeSpan { get; init; }
+    public int Damage { get; init; }
+    public int Speed { get; init; }
 }

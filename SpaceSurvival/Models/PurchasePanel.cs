@@ -5,11 +5,9 @@ namespace SpaceSurvival;
 public class PurchasePanel : Sprite
 {
     private List<CellInventoryPanel> Cells { get; } = new();
-    private static readonly int CountCells = 9;
-
     private readonly Texture2D _cellTexture = Globals.Content.Load<Texture2D>("Small_White_Cell");
-
     private const float CellScale = 0.60f;
+    private const int CountCells = 9;
 
     public PurchasePanel(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
@@ -38,13 +36,6 @@ public class PurchasePanel : Sprite
             }
         }
     }
-
-    // public void FillCellsWithLoot()
-    // {
-    //     for (var i = 0; i < CountCells; i++)
-    //         if (InventoryManager.ShipInventory.Count > i)
-    //             Cells[i].Loot = InventoryManager.ShipInventory[i];
-    // }
 
     private void UpdateCellState()
     {

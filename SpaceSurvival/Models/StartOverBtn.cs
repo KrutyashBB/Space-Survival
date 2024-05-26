@@ -2,11 +2,14 @@
 
 public class StartOverBtn : Sprite
 {
-    private readonly SpriteFont _font = Globals.Content.Load<SpriteFont>("font");
     private Rectangle Rect { get; set; }
+
+    private readonly SpriteFont _font = Globals.Content.Load<SpriteFont>("font");
+    private readonly SoundEffectInstance _clickBtnSound;
 
     public StartOverBtn(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {
+        _clickBtnSound = Globals.Content.Load<SoundEffect>("Audio/clickBtnSound").CreateInstance();
     }
 
     public void Update()
@@ -16,7 +19,11 @@ public class StartOverBtn : Sprite
         if (Rect.Contains(InputManager.MousePosition))
         {
             if (InputManager.ClickedMouseLeftButton())
+            {
+                _clickBtnSound.Play();
                 SceneManager.Reset();
+            }
+
             Color = Color.Gray;
         }
         else

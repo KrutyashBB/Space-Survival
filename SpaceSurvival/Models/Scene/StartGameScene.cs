@@ -5,15 +5,18 @@ namespace SpaceSurvival;
 public class StartGameScene : Scene
 {
     private SpriteFont _font;
-    private SoundEffectInstance _song;
     private StartGameSceneBtn _startGameBtn;
     private StartGameSceneBtn _controlSectionBtn;
+    
+    private SoundEffectInstance _song;
+    private SoundEffectInstance _clickBtnSound;
 
     protected override void Load()
     {
         _font = Globals.Content.Load<SpriteFont>("font");
         _song = Globals.Content.Load<SoundEffect>("Audio/mainSong").CreateInstance();
         _song.Volume = 0.5f;
+        _clickBtnSound = Globals.Content.Load<SoundEffect>("Audio/clickBtnSound").CreateInstance();
 
         _startGameBtn =
             new StartGameSceneBtn("Start Game", Globals.Content.Load<Texture2D>("Small_Blue_Panel"), Vector2.Zero,
@@ -32,12 +35,14 @@ public class StartGameScene : Scene
 
     private void StartGame(object sender, EventArgs e)
     {
+        _clickBtnSound.Play();
         _song.Stop();
         SceneManager.SwitchScene((int)TypeScene.SpaceScene);
     }
 
     private void ControlScene(object sender, EventArgs e)
     {
+        _clickBtnSound.Play();
         SceneManager.SwitchScene((int)TypeScene.ControlScene);
     }
 
@@ -51,9 +56,11 @@ public class StartGameScene : Scene
     {
         Globals.SpriteBatch.Draw(Globals.Content.Load<Texture2D>("bg-space"), Vector2.Zero, null, Color.White, 0f,
             Vector2.Zero, 5f, SpriteEffects.None, 0f);
+        
         Globals.SpriteBatch.DrawString(_font, "Space Survival",
             new Vector2(Globals.WindowSize.X / 2f - 220, Globals.WindowSize.Y / 2f - 100),
             Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+        
         _controlSectionBtn.Draw();
         _startGameBtn.Draw();
     }

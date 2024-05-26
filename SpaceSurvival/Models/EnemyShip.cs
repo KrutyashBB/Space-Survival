@@ -5,14 +5,13 @@ namespace SpaceSurvival;
 public class EnemyShip : Unit
 {
     public Rectangle Rect { get; private set; }
-    private readonly ProgressBar _healthBar;
-
     public MovementEnemyShips MoveEnemy { get; set; }
     private readonly FollowMovementEnemyShip _followMovement;
 
     private double _timeSinceFire;
     private const double FireInterval = 0.5;
 
+    private readonly ProgressBar _healthBar;
     private readonly SoundEffectInstance _shotSound;
 
 
@@ -53,6 +52,13 @@ public class EnemyShip : Unit
             MoveEnemy = new PatrolMovementEnemyShip(10);
     }
 
+    private void MakeShot()
+    {
+        _shotSound.Play();
+        Fire();
+        _timeSinceFire = 0;
+    }
+
     public void Update(Ship ship)
     {
         var minSize = Math.Min(Size.X, Size.Y);
@@ -66,11 +72,7 @@ public class EnemyShip : Unit
         {
             _timeSinceFire += Globals.TotalSeconds;
             if (_timeSinceFire >= FireInterval)
-            {
-                _shotSound.Play();
-                Fire();
-                _timeSinceFire = 0;
-            }
+                MakeShot();
         }
     }
 

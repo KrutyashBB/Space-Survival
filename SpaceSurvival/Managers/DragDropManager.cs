@@ -6,8 +6,6 @@ public static class DragDropManager
 {
     private static List<CellInventoryPanel> _draggables;
     private static List<CellInventoryPanel> _targets;
-
-
     private static CellInventoryPanel _dragItem;
 
     public static void Init()

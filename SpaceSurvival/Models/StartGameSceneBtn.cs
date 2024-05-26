@@ -32,10 +32,8 @@ public class StartGameSceneBtn : Sprite
 
     public event EventHandler OnClick;
 
-    private void Click()
-    {
+    private void Click() =>
         OnClick?.Invoke(this, EventArgs.Empty);
-    }
 
     public override void Draw()
     {

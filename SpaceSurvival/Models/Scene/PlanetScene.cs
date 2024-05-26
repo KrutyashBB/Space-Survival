@@ -15,13 +15,16 @@ public class PlanetScene : Scene
     private readonly LootManager _lootManager;
 
     private PlayerInventoryPanel _playerInventoryPanel;
-    private SpacewalkBtn _spacewalkBtn;
+    private readonly SpacewalkBtn _spacewalkBtn;
 
     private const float DurationLanding = 1f;
     private float _durationLandingLeft;
 
     private SoundEffectInstance _backSong;
     private readonly SoundEffectInstance _landingSound;
+    private readonly SoundEffectInstance _selectLootSound;
+    private SoundEffectInstance _stepSound;
+    private readonly SoundEffectInstance _clickBtnSound;
 
     private Matrix _translation;
 
@@ -33,17 +36,11 @@ public class PlanetScene : Scene
             _playerCoords, Scale, _map);
         _playerPosition = _player.Position;
 
-        if (typePlanet == TypePlanet.Green)
-            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForGreenPlanet").CreateInstance();
-        if (typePlanet == TypePlanet.Red)
-            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForRedPlanet").CreateInstance();
-        if (typePlanet == TypePlanet.Violet)
-            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForVioletPlanet").CreateInstance();
-        if (typePlanet == TypePlanet.Ice)
-            _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForIcePlanet").CreateInstance();
-        
+        SetStepAndBackSound(typePlanet);
         _landingSound = Globals.Content.Load<SoundEffect>("Audio/landingSound").CreateInstance();
         _landingSound.Volume = 0.5f;
+        _selectLootSound = Globals.Content.Load<SoundEffect>("Audio/sellectLootSound").CreateInstance();
+        _clickBtnSound = Globals.Content.Load<SoundEffect>("Audio/clickBtnSound").CreateInstance();
 
         _lootManager = new LootManager(_map, Scale);
         _lootManager.AddLoot(LootType.Gold, 2);
@@ -51,12 +48,7 @@ public class PlanetScene : Scene
         _lootManager.AddLoot(LootType.Bronze, 7);
 
         _planetEnemyManager = new PlanetEnemyManager(_player.Coords, _map, Scale);
-        if (typePlanet == TypePlanet.Red || typePlanet == TypePlanet.Violet)
-            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy2"), 7);
-        else if (typePlanet == TypePlanet.Green)
-            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy1"), 8);
-        else if (typePlanet == TypePlanet.Ice)
-            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy3"), 7);
+        CreateEnemies(typePlanet);
 
         _playerInventoryPanel =
             new PlayerInventoryPanel(Globals.Content.Load<Texture2D>("Small_Blue_Panel"), _player.Position, 0.4f);
@@ -64,9 +56,45 @@ public class PlanetScene : Scene
         _spacewalkBtn.OnClick += ClickSpacewalkBtn;
     }
 
+    private void SetStepAndBackSound(TypePlanet typePlanet)
+    {
+        switch (typePlanet)
+        {
+            case TypePlanet.Green:
+                _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForGreenPlanet").CreateInstance();
+                _stepSound = Globals.Content.Load<SoundEffect>("Audio/stepsOnGreenAndRedPlanet").CreateInstance();
+                break;
+            case TypePlanet.Red:
+                _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForRedPlanet").CreateInstance();
+                _stepSound = Globals.Content.Load<SoundEffect>("Audio/stepsOnGreenAndRedPlanet").CreateInstance();
+                break;
+            case TypePlanet.Violet:
+                _stepSound = Globals.Content.Load<SoundEffect>("Audio/stepsOnVioletPlanet").CreateInstance();
+                _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForVioletPlanet").CreateInstance();
+                _backSong.Volume = 0.7f;
+                break;
+            case TypePlanet.Ice:
+                _backSong = Globals.Content.Load<SoundEffect>("Audio/backSongForIcePlanet").CreateInstance();
+                _stepSound = Globals.Content.Load<SoundEffect>("Audio/stepsOnIcePlanet").CreateInstance();
+                break;
+        }
+    }
+
+    private void CreateEnemies(TypePlanet typePlanet)
+    {
+        if (typePlanet == TypePlanet.Red || typePlanet == TypePlanet.Violet)
+            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy2"), 7);
+        else if (typePlanet == TypePlanet.Green)
+            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy1"), 8);
+        else if (typePlanet == TypePlanet.Ice)
+            _planetEnemyManager.CreateEnemies(10, Globals.Content.Load<Texture2D>("Enemy3"), 7);
+    }
+
     private void ClickSpacewalkBtn(object sender, EventArgs e)
     {
         _backSong.Pause();
+        _clickBtnSound.Play();
+        _player.SwordBattleSound.Stop();
         SceneManager.SwitchScene((int)TypeScene.SpaceScene);
     }
 
@@ -104,6 +132,7 @@ public class PlanetScene : Scene
         var loot = _lootManager.Loots.FirstOrDefault(loot => _player.Coords == loot.Coords);
         if (loot != null && InventoryManager.CapacityPlayerInventory > 0)
         {
+            _selectLootSound.Play();
             InventoryManager.AddToPlayerInventory(loot);
             _lootManager.Loots.Remove(loot);
             _playerInventoryPanel.FillCellWithLoot();
@@ -118,7 +147,12 @@ public class PlanetScene : Scene
             _player.Reset();
             SceneManager.SwitchScene((int)TypeScene.PlayerDeathScene);
         }
-        
+
+        if (InputManager.Direction != Vector2.Zero && !_player.IsAttacking)
+            _stepSound.Play();
+        else
+            _stepSound.Stop();
+
         _durationLandingLeft += Globals.TotalSeconds;
         if (_durationLandingLeft > DurationLanding)
         {

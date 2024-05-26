@@ -7,7 +7,7 @@ public static class InputManager
     public static Vector2 MousePosition => Mouse.GetState().Position.ToVector2();
     public static KeyboardState KeyboardState { get; private set; }
     private static KeyboardState LastKeyboard { get; set; }
-    public static MouseState MouseState { get; private set; }
+    private static MouseState MouseState { get; set; }
     private static MouseState LastMouseState { get; set; }
 
 

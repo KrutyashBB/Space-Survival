@@ -5,7 +5,7 @@ public class Loot : Sprite
     private readonly LootType _type;
     private readonly int _value;
     private const int MapCellTexSize = 16;
-    public Vector2 Coords { get; private set; }
+    public Vector2 Coords { get; }
     
 
     public Loot(LootType type, int value, Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)

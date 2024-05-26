@@ -16,11 +16,11 @@ public class ProgressBar
     {
         _background = Globals.Content.Load<Texture2D>("back");
         _foreground = Globals.Content.Load<Texture2D>("front");
+        _part = new Rectangle(0, 0, _foreground.Width, _foreground.Height);
         _maxValue = maxValue;
         _currentValue = maxValue;
         _position = position;
         _scale = scale;
-        _part = new Rectangle(0, 0, _foreground.Width, _foreground.Height);
     }
 
     public void Update(int value, Vector2 pos)

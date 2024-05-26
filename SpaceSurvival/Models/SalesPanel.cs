@@ -5,11 +5,9 @@ namespace SpaceSurvival;
 public class SalesPanel : Sprite
 {
     private List<CellInventoryPanel> Cells { get; } = new();
-    private static readonly int CountCells = 9;
-
     private readonly Texture2D _cellTexture = Globals.Content.Load<Texture2D>("Small_White_Cell");
-
     private const float CellScale = 0.60f;
+    private const int CountCells = 9;
 
     public SalesPanel(Texture2D tex, Vector2 pos, float scale) : base(tex, pos, scale)
     {

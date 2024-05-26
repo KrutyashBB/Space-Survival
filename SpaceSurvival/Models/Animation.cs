@@ -21,10 +21,8 @@ public class Animation
         var frameWidth = _texture.Width / framesX;
         var frameHeight = _texture.Height / framesY;
 
-        for (int i = 0; i < _frames; i++)
-        {
+        for (var i = 0; i < _frames; i++)
             _sourceRectangles.Add(new Rectangle(i * frameWidth, (row - 1) * frameHeight, frameWidth, frameHeight));
-        }
     }
 
     public void Stop()
@@ -48,7 +46,6 @@ public class Animation
         if (!_active) return;
 
         _frameTimeLeft -= Globals.TotalSeconds;
-
         if (_frameTimeLeft <= 0)
         {
             _frameTimeLeft += _frameTime;

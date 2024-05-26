@@ -11,7 +11,7 @@ public class Enemy : Unit
     private const int MapCellTexSize = 16;
     private readonly PathToPlayer _path;
 
-    private AnimationManager _anims = new();
+    private readonly AnimationManager _anims = new();
     private Vector2 _direction;
 
     private readonly ProgressBar _healthBar;
@@ -34,12 +34,11 @@ public class Enemy : Unit
         _anims.AddAnimation("Idle", new Animation(Texture, framesX, 6, 0.1f));
         _anims.AddAnimation("RightRun", new Animation(Texture, framesX, 6, 0.1f, 3));
         _anims.AddAnimation("LeftRun", new Animation(Texture, framesX, 6, 0.1f, 4));
-        _anims.AddAnimation("RightAttack", new Animation(Texture, framesX, 6, 0.21f, 5));
-        _anims.AddAnimation("LeftAttack", new Animation(Texture, framesX, 6, 0.21f, 6));
+        _anims.AddAnimation("RightAttack", new Animation(Texture, framesX, 6, 0.15f, 5));
+        _anims.AddAnimation("LeftAttack", new Animation(Texture, framesX, 6, 0.15f, 6));
 
-        CurrentHealth = MaxHealth = 14;
+        CurrentHealth = MaxHealth = 20;
         Damage = 5;
-        Name = "Enemy";
 
         _healthBar = new ProgressBar(MaxHealth, new Vector2(Position.X - Size.X * 0.3f, Position.Y - Size.Y / 2f),
             0.2f);
@@ -50,37 +49,8 @@ public class Enemy : Unit
         CurrentHealth -= damage;
     }
 
-    public void Update(Vector2 playerCoords)
+    private void UpdateAnimation()
     {
-        if (!_map.IsInFov((int)Coords.X, (int)Coords.Y))
-        {
-            _anims.Update("Idle");
-            return;
-        }
-
-        _movementTimer += Globals.TotalSeconds;
-
-        _healthBar.Update(CurrentHealth, new Vector2(Position.X - Size.X * 0.3f, Position.Y - Size.Y / 2f));
-
-        if (_movementTimer > MovementDelay)
-        {
-            _path.CreateFromTO((int)Coords.X, (int)Coords.Y, (int)playerCoords.X, (int)playerCoords.Y);
-
-            if (!_path.IsNearThePlayer)
-            {
-                var cell = _path.StepForward;
-                if (cell != null)
-                {
-                    _direction = new Vector2(cell.X - Coords.X, Math.Abs(cell.Y - Coords.Y));
-                    Coords.X = cell.X;
-                    Coords.Y = cell.Y;
-                    _newPosition = new Vector2(Coords.X * MapCellTexSize * Scale, Coords.Y * MapCellTexSize * Scale);
-                }
-            }
-
-            _movementTimer = 0;
-        }
-
         if (_path.IsNearThePlayer)
         {
             if (_direction == new Vector2(1, 0) || _direction == new Vector2(0, 1))
@@ -95,6 +65,37 @@ public class Enemy : Unit
             else if (_direction == new Vector2(-1, 0))
                 _anims.Update("LeftRun");
         }
+    }
+
+    public void Update(Vector2 playerCoords)
+    {
+        if (!_map.IsInFov((int)Coords.X, (int)Coords.Y))
+        {
+            _anims.Update("Idle");
+            return;
+        }
+
+        _healthBar.Update(CurrentHealth, new Vector2(Position.X - Size.X * 0.3f, Position.Y - Size.Y / 2f));
+
+        _movementTimer += Globals.TotalSeconds;
+        if (_movementTimer > MovementDelay)
+        {
+            _path.CreateFromTo((int)Coords.X, (int)Coords.Y, (int)playerCoords.X, (int)playerCoords.Y);
+            if (!_path.IsNearThePlayer)
+            {
+                var cell = _path.StepForward;
+                if (cell != null)
+                {
+                    _direction = new Vector2(cell.X - Coords.X, Math.Abs(cell.Y - Coords.Y));
+                    Coords.X = cell.X;
+                    Coords.Y = cell.Y;
+                    _newPosition = new Vector2(Coords.X * MapCellTexSize * Scale, Coords.Y * MapCellTexSize * Scale);
+                }
+            }
+            _movementTimer = 0;
+        }
+
+        UpdateAnimation();
 
         Position = Vector2.Lerp(Position, _newPosition, 0.1f);
     }

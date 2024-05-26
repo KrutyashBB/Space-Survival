@@ -55,6 +55,12 @@
 /processorParam:Quality=Best
 /build:Audio/backSongSpaceScene.mp3
 
+#begin Audio/clickBtnSound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/clickBtnSound.mp3
+
 #begin Audio/engineSound.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -73,6 +79,12 @@
 /processorParam:Quality=Best
 /build:Audio/mainSong.mp3
 
+#begin Audio/sellectLootSound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/sellectLootSound.mp3
+
 #begin Audio/shotSound.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -85,11 +97,29 @@
 /processorParam:Quality=Best
 /build:Audio/soundInShip.mp3
 
-#begin Audio/swordHitSound.mp3
+#begin Audio/stepsOnGreenAndRedPlanet.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Audio/swordHitSound.mp3
+/build:Audio/stepsOnGreenAndRedPlanet.mp3
+
+#begin Audio/stepsOnIcePlanet.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/stepsOnIcePlanet.mp3
+
+#begin Audio/stepsOnVioletPlanet.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/stepsOnVioletPlanet.mp3
+
+#begin Audio/swordBattleSound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/swordBattleSound.mp3
 
 #begin back.png
 /importer:TextureImporter

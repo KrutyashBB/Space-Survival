@@ -12,6 +12,7 @@ public class PlayerShipScene : Scene
     private SpriteFont _font;
 
     private SoundEffectInstance _backSong;
+    private SoundEffectInstance _clickBtnSound;
 
     protected override void Load()
     {
@@ -22,13 +23,14 @@ public class PlayerShipScene : Scene
             new ShipStoragePanel(Globals.Content.Load<Texture2D>("Big_Blue_Panel"),
                 new Vector2(Globals.WindowSize.X / 2f, 0), 0.38f);
 
+        _font = Globals.Content.Load<SpriteFont>("font");
         _spacewalkBtn = new SpacewalkBtn(Globals.Content.Load<Texture2D>("Small_Orange_Cell"), Vector2.Zero, 0.5f);
         _spacewalkBtn.OnClick += ClickSpacewalkBtn;
-        _font = Globals.Content.Load<SpriteFont>("font");
 
         _backSong = Globals.Content.Load<SoundEffect>("Audio/soundInShip").CreateInstance();
         _backSong.IsLooped = true;
         _backSong.Volume = 0.4f;
+        _clickBtnSound = Globals.Content.Load<SoundEffect>("Audio/clickBtnSound").CreateInstance();
     }
 
     public override void Activate()
@@ -40,6 +42,7 @@ public class PlayerShipScene : Scene
 
     private void ClickSpacewalkBtn(object sender, EventArgs e)
     {
+        _clickBtnSound.Play();
         _backSong.Pause();
         SceneManager.SwitchScene((int)TypeScene.SpaceScene);
     }
@@ -61,9 +64,11 @@ public class PlayerShipScene : Scene
     {
         Globals.SpriteBatch.Draw(Globals.Content.Load<Texture2D>("spaceShipBack"), Vector2.Zero, null, Color.White, 0f,
             Vector2.Zero, 1f, SpriteEffects.None, 0f);
+        
         Globals.SpriteBatch.DrawString(_font, "SHIP STORAGE",
             new Vector2(Globals.WindowSize.X / 2f - 230, _shipStoragePanel.Position.Y - 70),
             Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+        
         _shipStoragePanel.Draw();
         _playerInventoryPanel.Draw();
         _shipStoragePanel.DrawLoot();

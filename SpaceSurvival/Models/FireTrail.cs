@@ -12,8 +12,8 @@ public class FireTrail
 {
     private readonly AnimationManager _anims = new();
     private Vector2 _position;
-    private Point _size;
-    private Vector2 _origin;
+    private readonly Point _size;
+    private readonly Vector2 _origin;
 
     public FireTrail(Texture2D tex, float scale)
     {

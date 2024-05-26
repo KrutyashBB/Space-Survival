@@ -4,8 +4,8 @@ namespace SpaceSurvival;
 
 public class Projectile : Sprite
 {
-    public ProjectileType Type { get; set; }
-    private Vector2 Direction { get; set; }
+    public ProjectileType Type { get; }
+    private Vector2 Direction { get; }
     public float LifeSpan { get; private set; }
     public int Damage { get; private set; }
     public Rectangle Rect { get; private set; }
