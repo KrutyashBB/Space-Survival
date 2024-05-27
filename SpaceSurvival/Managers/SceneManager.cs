@@ -6,6 +6,7 @@ public enum TypeScene
 {
     StartGameScene,
     ControlScene,
+    AboutScene,
     StoreScene,
     PlayerDeathScene,
     PlayerShipScene,
@@ -24,6 +25,7 @@ public static class SceneManager
         {
             { (int)TypeScene.StartGameScene, new StartGameScene() },
             { (int)TypeScene.ControlScene, new ControlScene() },
+            { (int)TypeScene.AboutScene, new AboutScene() },
             { (int)TypeScene.StoreScene, new StoreScene() },
             { (int)TypeScene.PlayerDeathScene, new PlayerDeathScene() },
             { (int)TypeScene.PlayerShipScene, new PlayerShipScene() }
@@ -41,6 +43,7 @@ public static class SceneManager
         {
             { (int)TypeScene.StartGameScene, new StartGameScene() },
             { (int)TypeScene.ControlScene, new ControlScene() },
+            { (int)TypeScene.AboutScene, new AboutScene() },
             { (int)TypeScene.StoreScene, new StoreScene() },
             { (int)TypeScene.PlayerDeathScene, new PlayerDeathScene() },
             { (int)TypeScene.PlayerShipScene, new PlayerShipScene() }

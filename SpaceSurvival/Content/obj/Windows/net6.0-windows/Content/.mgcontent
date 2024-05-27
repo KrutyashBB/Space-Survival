@@ -12,6 +12,7 @@
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/backSongSpaceScene.mp3</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/clickBtnSound.mp3</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/engineSound.mp3</File>
+    <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/history.mp3</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/landingSound.mp3</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/mainSong.mp3</File>
     <File>C:/Users/Krutyash/RiderProjects/SpaceSurvival/SpaceSurvival/Content/Audio/sellectLootSound.mp3</File>
@@ -65,6 +66,7 @@
   </SourceFiles>
   <DestFiles>
     <File>fireTrail.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
