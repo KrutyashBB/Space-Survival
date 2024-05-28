@@ -64,7 +64,7 @@ public class SpaceScene : Scene
             if (_ship.Rect.Intersects(planet.Rect))
             {
                 planet.IsCollisionWithPlayerShip = true;
-                if (InputManager.KeyboardKeyPressed(Keys.W))
+                if (InputManager.KeyboardKeyPressed(Keys.F))
                 {
                     _backSong.Pause();
                     _ship.EngineSound.Pause();

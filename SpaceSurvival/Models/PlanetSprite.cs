@@ -44,7 +44,7 @@ public class PlanetSprite : Sprite
                 Color.Blue);
         
         if (IsCollisionWithPlayerShip)
-            Globals.SpriteBatch.DrawString(_font, "Click W",
+            Globals.SpriteBatch.DrawString(_font, "Click F",
                 new Vector2(Position.X - 50, Position.Y - Size.Y * 0.7f), Color.White);
     }
 }

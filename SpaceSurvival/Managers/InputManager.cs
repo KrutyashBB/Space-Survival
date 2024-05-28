@@ -32,13 +32,13 @@ public static class InputManager
         KeyboardState = Keyboard.GetState();
 
         _direction = Vector2.Zero;
-        if (KeyboardState.IsKeyDown(Keys.Up))
+        if (KeyboardState.IsKeyDown(Keys.W))
             _direction.Y++;
-        if (KeyboardState.IsKeyDown(Keys.Down))
+        if (KeyboardState.IsKeyDown(Keys.S))
             _direction.Y--;
-        if (KeyboardState.IsKeyDown(Keys.Left))
+        if (KeyboardState.IsKeyDown(Keys.A))
             _direction.X--;
-        if (KeyboardState.IsKeyDown(Keys.Right))
+        if (KeyboardState.IsKeyDown(Keys.D))
             _direction.X++;
 
         LastMouseState = MouseState;
