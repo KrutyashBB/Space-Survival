@@ -52,12 +52,12 @@ public class Ship : Unit
 
     private void ChangeSpeed()
     {
-        if (InputManager.KeyboardState.IsKeyDown(Keys.LeftShift) && !InputManager.KeyboardState.IsKeyDown(Keys.Down))
+        if (InputManager.KeyboardState.IsKeyDown(Keys.LeftShift) && !InputManager.KeyboardState.IsKeyDown(Keys.S))
         {
             _currentSpeed = AccelerationSpeed;
             _fireTrail.Update(new Vector2(Position.X, Position.Y), Rotation, true);
         }
-        else if (InputManager.KeyboardState.IsKeyDown(Keys.Down))
+        else if (InputManager.KeyboardState.IsKeyDown(Keys.S))
             _currentSpeed = BaseSpeed;
         else
         {
@@ -120,7 +120,7 @@ public class Ship : Unit
         Globals.SpriteBatch.Draw(Texture, Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None,
             1f);
 
-        if (InputManager.Direction != Vector2.Zero && !InputManager.KeyboardState.IsKeyDown(Keys.Down))
+        if (InputManager.Direction != Vector2.Zero && !InputManager.KeyboardState.IsKeyDown(Keys.S))
             _fireTrail.Draw(Rotation + 1.55f);
 
         _healthBar.Draw();
